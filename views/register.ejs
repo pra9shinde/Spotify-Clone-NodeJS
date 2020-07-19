@@ -2,92 +2,93 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/style.css">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/css/register.css" />
 </head>
 
 <body>
-    <h1>ExpressMusicX</h1>
-    <div id="inputContainer">
-        <form action="/login" id="loginForm" method="POST">
-            <h2>Login to your account</h2>
-            <p>
-                <label for="loginUsername">Username* </label>
-                <input type="text" id="loginUsername" name="loginUsername" placeholder="eg. pranav" required>
-            </p>
-            <p>
-                <label for="loginPassword">Password* </label>
-                <input type="password" id="loginPassword" name="loginPassword" placeholder="Your password*" required>
-            </p>
+	<div id="background">
+		<h1>ExpressMusicX</h1>
+		<div id="login-container">
+			<div id="inputContainer">
+				<form action="/login" id="loginForm" method="POST">
+					<h2>Login to your account</h2>
+					<p>
+						<% if(typeof errorsObj !== 'undefined') { %>
+						<%- errorsObj.getError('loginIssue') %> <% } %>
+						<label for="loginUsername">Username* </label>
+						<input type="text" id="loginUsername" name="loginUsername" placeholder="eg. pranav" required />
+					</p>
+					<p>
+						<label for="loginPassword">Password* </label>
+						<input type="password" id="loginPassword" name="loginPassword" placeholder="Your password*"
+							required />
+					</p>
 
-            <button type="submit" name="loginButton">Login</button>
-        </form>
+					<button type="submit" name="loginButton">Login</button>
+				</form>
 
-        <form action="/register" id="registerForm" method="POST">
-            <h2>Create your free account</h2>
-            <p>
-                <% if(typeof errorsObj !== 'undefined') {  %>
+				<form action="/register" id="registerForm" method="POST">
+					<h2>Create your free account</h2>
+					<p>
+						<% if(typeof errorsObj !== 'undefined') { %>
+						<%- errorsObj.getError('userName') %>
+						<%- errorsObj.getError('userNameExists') %> <% } %>
+						<label for="username">Username* </label>
+						<input type="text" id="username" name="username" placeholder="eg. pranav"
+							value="<%=formData.userName%>" required />
+					</p>
 
-                <%- errorsObj.getError('userName') %>
-                <% } %>
-                <label for="username">Username* </label>
-                <input type="text" id="username" name="username" placeholder="eg. pranav" value="<%=formData.userName%>"
-                    required>
-            </p>
+					<p>
+						<% if(typeof errorsObj !== 'undefined') { %>
+						<%- errorsObj.getError('firstName') %> <% } %>
+						<label for="firstName">First name* </label>
+						<input type="text" id="firstName" name="firstName" placeholder="eg. Pranav"
+							value="<%=formData.firstName%>" required />
+					</p>
 
-            <p>
-                <% if(typeof errorsObj !== 'undefined') {  %>
-                <%- errorsObj.getError('firstName') %>
-                <% } %>
-                <label for="firstName">First name* </label>
-                <input type="text" id="firstName" name="firstName" placeholder="eg. Pranav"
-                    value="<%=formData.firstName%>" required>
-            </p>
+					<p>
+						<% if(typeof errorsObj !== 'undefined') { %>
+						<%- errorsObj.getError('lastName') %> <% } %>
+						<label for="lastName">Last name* </label>
+						<input type="text" id="lastName" name="lastName" placeholder="eg. Shinde"
+							value="<%=formData.lastName%>" required />
+					</p>
 
-            <p>
-                <% if(typeof errorsObj !== 'undefined') {  %>
-                <%- errorsObj.getError('lastName') %>
-                <% } %>
-                <label for="lastName">Last name* </label>
-                <input type="text" id="lastName" name="lastName" placeholder="eg. Shinde" value="<%=formData.lastName%>"
-                    required>
-            </p>
+					<p>
+						<% if(typeof errorsObj !== 'undefined') { %>
+						<%- errorsObj.getError('email') %> <% } %>
+						<label for="email">Email* </label>
+						<input type="email" id="email" name="email" placeholder="pranav@g.com"
+							value="<%=formData.email%>" required />
+					</p>
 
-            <p>
-                <% if(typeof errorsObj !== 'undefined') {  %>
-                <%- errorsObj.getError('email') %>
-                <% } %>
-                <label for="email">Email* </label>
-                <input type="email" id="email" name="email" placeholder="pranav@g.com" value="<%=formData.email%>"
-                    required>
-            </p>
+					<p>
+						<% if(typeof errorsObj !== 'undefined') { %>
+						<%- errorsObj.getError('passMatch') %> <% } %>
+						<% if(typeof errorsObj !== 'undefined') { %>
+						<%- errorsObj.getError('passLength') %>
+						<% } %>
+						<label for="password">Password* </label>
+						<input type="password" id="password" name="password" placeholder="Your password*"
+							value="<%=formData.password%>" required />
+					</p>
+					<p>
+						<% if(typeof errorsObj !== 'undefined') { %>
+						<%- errorsObj.getError('passPattern') %> <% } %>
+						<label for="password2">Confirm Password* </label>
+						<input type="password" id="password2" name="password2" placeholder="Re-enter password*"
+							value="<%=formData.password2%>" required />
+					</p>
 
-            <p>
-                <% if(typeof errorsObj !== 'undefined') {  %>
-                <%- errorsObj.getError('passMatch') %>
-                <% } %>
-                <% if(typeof errorsObj !== 'undefined') {  %>
-                <%- errorsObj.getError('passLength') %>
-                <% } %>
-                <label for="password">Password* </label>
-                <input type="password" id="password" name="password" placeholder="Your password*"
-                    value="<%=formData.password%>" required>
-            </p>
-            <p>
-                <% if(typeof errorsObj !== 'undefined') {  %>
-                <%- errorsObj.getError('passPattern') %>
-                <% } %>
-                <label for="password2">Confirm Password* </label>
-                <input type="password" id="password2" name="password2" placeholder="Re-enter password*"
-                    value="<%=formData.password2%>" required>
-            </p>
+					<button type="submit" name="registerButton">Register</button>
+				</form>
+			</div>
+		</div>
 
-            <button type="submit" name="registerButton">Register</button>
-        </form>
-
-    </div>
+	</div>
 </body>
 
 </html>
