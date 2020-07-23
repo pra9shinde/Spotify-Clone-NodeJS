@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('templates/header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+<h1 class="page-header-big">You might also like</h1>
 
-<body>
-    <h1>ExpressMusicX</h1>
+<div class="gridViewContainer">
+    <% albums.forEach(album => { %>
+    <div class="gridViewItem">
+        <a href="/album?id=<%= album.id %>">
+            <img src="<%= album.artworkPath	 %>" alt="<%= album.title %>">
 
-</body>
+            <div class="gridViewInfo">
+                <%= album.title %>
 
-</html>
+            </div>
+        </a>
+    </div>
+    <% }); %>
+</div>
+
+<%- include('templates/footer') %>

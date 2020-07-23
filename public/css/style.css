@@ -1,7 +1,258 @@
-h1{
-    color: salmon;
-    font-size: 42px;
-    font-family: Arial, Helvetica, sans-serif;
-    letter-spacing: 3px;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    color: #fff;
+    font-family:  "Helvetica Neue", "Helvetica" , "Arial", sans-serif;
+    background-color: #181818;
+    font-size: 14px;
+    min-width: 720px;
+}
+
+#nowPlayingBarContainer{
+    width: 100%;
+    background-color: #282828;
+    position: fixed;
+    bottom: 0;
+    min-width: 620px;
+
+}
+
+
+
+#nowPlayingbar{
+    display: flex;
+    height: 90px;
+    padding: 16px;
+    
+}
+
+#nowPlayingLeft, 
+#nowPlayingRight{
+    width: 30%;
+    min-width: 180px;
+}
+
+#nowPlayingRight {
+    position: relative;
+    margin-top: 30px;
+}
+
+#nowPlayingCenter{
+    width: 40%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nowPlayingbar .content{
+    width: 100%;
+}
+
+.btns{
+    margin: 0 auto;
+    display: table;
+
+}
+
+.control-btn{
+    background-color: transparent;
+    border: 0;
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+.control-btn img{
+    height: 20px;
+    width: 20px;
+}
+
+.control-btn.play img,
+.control-btn.pause img{
+    height: 32px;
+    width: 32px;
+}
+
+.control-btn:hover{
+    cursor: pointer;
+}
+
+.playbackBar{
+    display: flex;
+    min-width: 500px;
+}
+
+.progressTime{
+    color: #a0a0a0;
+    font-size: 11px;
+    min-width: 40px;
     text-align: center;
+}
+
+.progressBar{
+    width: 100%;
+    height: 12px;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.progressBarBG{
+    background-color: #404040;
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
+}
+
+.progress{
+    background-color: #a0a0a0;
+    height: 4px;
+    width: 0;
+    border-radius: 2px;
+}
+
+.playbackBar .progressBar{
+    margin-top: 3px;
+}
+
+#nowPlayingLeft .albumArtWork{
+    max-width: 57px;
+    margin-right: 15px;
+    float: left;
+    background-size: cover;
+}
+
+#nowPlayingLeft .trackInfo{
+    display: table;
+}
+
+#nowPlayingLeft .trackInfo .trackName{
+    margin: 6px 0;
+    display: inline-block;
+    width: 100%;
+}
+
+#nowPlayingLeft .trackInfo .artistName span{
+    font-size: 12px;
+    color: #a0a0aa;
+}
+
+.volumeBar{
+    width: 180px;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.volumeBar .progressBar{
+    width: 125px;
+}
+
+#topContainer{
+    min-height: 100%;
+    width: 100%;
+}
+
+#navbarContainer{
+    width: 220px;
+    background-color: #000;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.navBar{
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    -ms-flex-direction: column;
+}
+
+.navBar a{
+    color: #a0a0a0;
+    text-decoration: none;
+}
+
+.logo{
+    margin: 10px 0;
+}
+
+.logo img{
+    width: 40px;
+}
+
+.navItemLink .icon{
+    position: absolute;
+    right: 0;
+    top: 6px;
+    width: 25px;
+}
+
+.navItemLink:hover{
+    color:#fff;
+}
+
+.navBar .group{
+    border-top: 1px solid #a0a0a0;
+}
+
+.navItem{
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 700;
+    display: block;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+
+#mainViewContainer{
+    margin-left: 220px;
+    padding-bottom: 90px;
+    width: calc(100% - 220px);
+}
+
+#mainContent{
+    padding: 0 20px;
+}
+
+.page-header-big{
+    padding: 20px;
+    text-align: center;
+}
+
+.gridViewItem{
+    display: inline-block;
+    margin-right: 20px;
+    width: 29%;
+    max-width: 200px;
+    min-width: 150px;
+    margin-bottom: 20px;
+}
+
+.gridViewItem img{
+    width: 100%;
+    border-radius: 25px;
+    box-shadow: 18px 12px 26px rgba(0, 0, 0, .9);
+}
+
+.gridViewItem a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.gridViewInfo{
+    text-align: center;
+    padding: 5px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: bolder;
+    letter-spacing: 1px;
 }

@@ -1,6 +1,5 @@
 const db = require("../util/database");
 const crypto = require("crypto");
-const { profile } = require("console");
 
 class Account {
 	constructor() {

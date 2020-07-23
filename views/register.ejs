@@ -6,11 +6,37 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><%= title %></title>
 	<link rel="stylesheet" href="/css/register.css" />
+
 </head>
 
 <body>
+	<% if(typeof src !== 'undefined') { %>
+
+	<% if(src === 'reg') { %>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			showRegister();
+		}, false);
+	</script>
+
+	<% } else if(src === 'login') { %>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			showLogin();
+		}, false);
+	</script>
+
+	<% } else { %>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			showLogin();
+		}, false);
+	</script>
+	<% }%>
+
+	<% }%>
 	<div id="background">
-		<h1>ExpressMusicX</h1>
+		<h1 id="title">ExpressMusic<span>X</span></h1>
 		<div id="login-container">
 			<div id="inputContainer">
 				<form action="/login" id="loginForm" method="POST">
@@ -19,7 +45,8 @@
 						<% if(typeof errorsObj !== 'undefined') { %>
 						<%- errorsObj.getError('loginIssue') %> <% } %>
 						<label for="loginUsername">Username* </label>
-						<input type="text" id="loginUsername" name="loginUsername" placeholder="eg. pranav" required />
+						<input type="text" id="loginUsername" name="loginUsername" placeholder="eg. pranav"
+							value="<%=loginUsername%>" required />
 					</p>
 					<p>
 						<label for="loginPassword">Password* </label>
@@ -28,6 +55,10 @@
 					</p>
 
 					<button type="submit" name="loginButton">Login</button>
+
+					<div class="hasAccountText">
+						<a href="#"><span id="hideLogin">Don't have an account yet? Signup here</span></a>
+					</div>
 				</form>
 
 				<form action="/register" id="registerForm" method="POST">
@@ -84,11 +115,27 @@
 					</p>
 
 					<button type="submit" name="registerButton">Register</button>
+
+					<div class="hasAccountText">
+						<a href="#"><span id="hideRegister">Already have an account? Login here</span></a>
+					</div>
 				</form>
+			</div>
+
+			<div id="loginText">
+				<h1>Get great music, right now</h1>
+				<h2>Listen to loads of songs for free</h2>
+				<ul>
+					<li>Discover music you'll fall in love with</li>
+					<li>Create your own playlist</li>
+					<li>Follow artiststo keep up to date</li>
+				</ul>
 			</div>
 		</div>
 
 	</div>
+	<script src="/js/register.js"></script>
+
 </body>
 
 </html>

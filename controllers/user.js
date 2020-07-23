@@ -1,12 +1,14 @@
 //Load Models
 const Account = require("../models/Account");
+const Songs = require('../models/Songs');
+
 const data = {
 	userName: "",
 	firstName: "",
 	lastName: "",
 	email: "",
 	password: "",
-	password2: "",
+	password2: ""
 };
 
 // Load index page view
@@ -15,14 +17,24 @@ exports.getIndex = (req, res, next) => {
 		return res.render("register", {
 			title: "ExpressMusicX - Register",
 			formData: data,
+			loginUsername: ''
 		});
 	}
-	res.render("index", { title: "ExpressMusicX" });
+
+	//Get all albums
+	Songs.fetchAllAlbums()
+		.then(result => {
+			result = Object.values(JSON.parse(JSON.stringify(result[0])));
+			res.render("index", { title: "ExpressMusicX", 'albums': result });
+		})
+		.catch(e => {
+			console.log(e);
+		});
 };
 
 // Register page view
 exports.getRegister = (req, res, next) => {
-	res.render("register", { title: "ExpressMusicX - Register", formData: data });
+	res.render("register", { title: "ExpressMusicX - Register", formData: data, loginUsername: '' });
 };
 
 // Post /login request
@@ -32,14 +44,15 @@ exports.login = (req, res, next) => {
 
 	const account = new Account();
 
-	account
-		.login(username, password)
+	account.login(username, password)
 		.then((result) => {
 			if (result.status === "failed") {
 				res.render("register", {
 					title: "ExpressMusicX - Register",
 					errorsObj: account,
 					formData: data,
+					loginUsername: username,
+					src: 'login'
 				});
 			} else {
 				req.session.loggedinUser = username;
@@ -72,6 +85,8 @@ exports.register = (req, res, next) => {
 					title: "ExpressMusicX - Register",
 					errorsObj: account,
 					formData: data,
+					loginUsername: username,
+					src: 'reg'
 				});
 			}
 		});
