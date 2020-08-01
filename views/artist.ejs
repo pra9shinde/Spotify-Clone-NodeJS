@@ -1,0 +1,75 @@
+<% if(!isAjaxRequest) { %>
+<%- include('templates/header') %>
+<% } %>
+
+<div class="entityInfo borderBottom">
+    <div class="centerSection">
+        <div class="artistInfo">
+            <h1 class="artistName"><%= data.mainArtistName %></h1>
+            <div class="headerButtons">
+                <button class="button green" onclick="playFirst()">Play</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="trackListContainer borderBottom">
+    <h2>POPULAR SONGS</h2>
+    <ul class="trackList">
+        <% let i = 1; %>
+        <% let songIDS = []; //Store Song ID's in an array for templplaylist array %>
+        <% data.songsList.forEach( song => { %>
+        <div>
+            <% if(i > 5) { return; }%>
+        </div>
+        <li class="trackListRow">
+            <% songIDS.push(song.id); //Push Song ID's in an array  %>
+            <div class="trackCount">
+                <img src="/images/icons/play-white.png" class="play" alt="Play Song"
+                    onclick="setTrack('<%= song.id %>', tempPlaylist, true)">
+                <span class="trackNumber"><%= i %></span>
+            </div>
+
+            <div class="trackInfo">
+                <span class="trackName"><%= song.title %></span>
+                <span class="artistName"><%= song.artistName %></span>
+            </div>
+
+            <div class="trackOptions">
+                <img src="/images/icons/more.png" class="optionsBtn" alt="More Options">
+            </div>
+
+            <div class="trackDuration">
+                <span class="duration"><%= song.duration %></span>
+            </div>
+
+        </li>
+        <% i++; %>
+        <% }); %>
+
+
+        <script>
+            tempPlaylist = JSON.parse('<%- JSON.stringify(songIDS) %>'); //Store Current Album Song IDS into tempPlaylist JS variable
+        </script>
+    </ul>
+</div>
+
+
+<div class="gridViewContainer">
+    <h2>ALBUMS</h2>
+    <% data.albums.forEach(album => { %>
+    <div class="gridViewItem">
+        <span onclick="openPage('/album?id=<%= album.id %>')" role="link" tabindex="0">
+            <img src="<%= album.artworkPath	 %>" alt="<%= album.title %>">
+
+            <div class="gridViewInfo">
+                <%= album.title %>
+            </div>
+        </span>
+    </div>
+    <% }); %>
+</div>
+
+<% if(!isAjaxRequest) { %>
+<%- include('templates/footer') %>
+<% } %>

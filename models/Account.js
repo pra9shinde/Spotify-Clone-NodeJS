@@ -139,7 +139,7 @@ class Account {
 			}
 
 			this.errorArray.loginIssue = "";
-			return { status: "success", message: "Login Successfull" };
+			return { status: "success", message: "Login Successfull", userFullName: `${resultArray[0].firstname} ${resultArray[0].lastname}` };
 		} catch (e) {
 			console.log(e);
 			return { status: "failed", message: "DB Operation Failed" };

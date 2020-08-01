@@ -7,17 +7,21 @@
         <div id="nowPlayingLeft">
             <div class="content">
                 <span class="albumLink">
-                    <img src="https://www.designformusic.com/wp-content/uploads/2016/02/volta-music-trailer-music-album-cover-design.jpg"
-                        alt="" class="albumArtWork">
+                    <!-- <img src="https://www.designformusic.com/wp-content/uploads/2016/02/volta-music-trailer-music-album-cover-design.jpg"
+                        alt="" class="albumArtWork"> -->
+                    <img src="" alt="Album Cover" class="albumArtWork" role="link" tabindex="0">
+
                 </span>
 
                 <div class="trackInfo">
                     <span class="trackName">
-                        <span>Mandala</span>
+                        <!-- <span>Mandala</span> -->
+                        <span role="link" tabindex="0"></span>
                     </span>
 
                     <span class="artistName">
-                        <span>Da Vinci Vini</span>
+                        <!-- <span>Da Vinci Vini</span> -->
+                        <span role="link" tabindex="0"></span>
                     </span>
                 </div>
             </div>
@@ -26,27 +30,27 @@
         <div id="nowPlayingCenter">
             <div class="content playerControls">
                 <div class="btns">
-                    <button class="control-btn shuffle" title="Shuffle Songs">
+                    <button class="control-btn shuffle" title="Shuffle Songs" onclick="setShuffle()">
                         <img src="/images/icons/shuffle.png" alt="Shuffle Songs">
                     </button>
 
-                    <button class="control-btn previous" title="Previous Song">
+                    <button class="control-btn previous" title="Previous Song" onclick="prevSong()">
                         <img src="/images/icons/previous.png" alt="Previous Song">
                     </button>
 
                     <button class="control-btn play" title="Play Song">
-                        <img src="/images/icons/play.png" alt="Play Song">
+                        <img src="/images/icons/play.png" alt="Play Song" onclick="playSong()">
                     </button>
 
-                    <button class="control-btn pause" title="Pause Song" style="display: none;">
+                    <button class="control-btn pause" title="Pause Song" style="display: none;" onclick="pauseSong()">
                         <img src="/images/icons/pause.png" alt="Pause Song">
                     </button>
 
-                    <button class="control-btn next" title="Next Song">
+                    <button class="control-btn next" title="Next Song" onclick="nextSong()">
                         <img src="/images/icons/next.png" alt="Next Song">
                     </button>
 
-                    <button class="control-btn repeat" title="Repeat Song">
+                    <button class="control-btn repeat" title="Repeat Song" onclick="setRepeat()">
                         <img src="/images/icons/repeat.png" alt="Repeat Song">
                     </button>
                 </div>
@@ -67,7 +71,7 @@
 
         <div id="nowPlayingRight">
             <div class="volumeBar">
-                <button class="control-btn" title="Volume button">
+                <button class="control-btn volume" title="Volume button" onclick="setMute()">
                     <img src="/images/icons/volume.png" alt="Volume">
                 </button>
 

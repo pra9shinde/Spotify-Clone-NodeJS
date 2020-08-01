@@ -1,0 +1,115 @@
+<% if(!isAjaxRequest) { %>
+<%- include('templates/header') %>
+<% } %>
+
+<div class="searchContainer">
+    <h4>Search for an artist, album or song</h4>
+    <input type="text" name="search" id="search" class="searchInput" value="<%= term %>" placeholder="Start typing..."
+        onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">
+</div>
+
+<% if(term.length > 0) { %>
+<div class="trackListContainer borderBottom" style="margin-top: 10px;">
+    <h2>SONGS</h2>
+    <ul class="trackList">
+        <% let i = 1; %>
+        <% let songIDS = []; //Store Song ID's in an array for templplaylist array %>
+
+
+        <% if(data.songsList.length === 0) { %>
+        <span class="noResult">No songs found</span>
+        <% } %>
+
+
+
+        <% data.songsList.forEach( song => { %>
+        <div>
+            <% if(i > 15) { return; }%>
+        </div>
+
+        <li class="trackListRow">
+            <% songIDS.push(song.id); //Push Song ID's in an array  %>
+            <div class="trackCount">
+                <img src="/images/icons/play-white.png" class="play" alt="Play Song"
+                    onclick="setTrack('<%= song.id %>', tempPlaylist, true)">
+                <span class="trackNumber"><%= i %></span>
+            </div>
+
+            <div class="trackInfo">
+                <span class="trackName"><%= song.title %></span>
+                <span class="artistName"><%= song.artistName %></span>
+            </div>
+
+            <div class="trackOptions">
+                <img src="/images/icons/more.png" class="optionsBtn" alt="More Options">
+            </div>
+
+            <div class="trackDuration">
+                <span class="duration"><%= song.duration %></span>
+            </div>
+
+        </li>
+        <% i++; %>
+        <% }); %>
+
+
+        <script>
+            tempPlaylist = JSON.parse('<%- JSON.stringify(songIDS) %>'); //Store Current Album Song IDS into tempPlaylist JS variable
+        </script>
+    </ul>
+</div>
+
+<div class="artistsContainer borderBottom">
+    <h2>ARTISTS</h2>
+    <% if(data.artistList.length === 0) { %>
+    <span class="noResult">No Artist found</span>
+    <% } %>
+
+
+    <% data.artistList.forEach( artist => { %>
+    <div class="searchResultRow">
+        <div class="artistName">
+            <span role="link" tabindex="0" onclick="openPage('/artist?id=<%= artist.id %>')"><%= artist.name %></span>
+        </div>
+    </div>
+    <% }); %>
+
+</div>
+
+<div class="gridViewContainer">
+    <h2>ALBUMS</h2>
+    <% if(data.albumList.length === 0) { %>
+    <span class="noResult">No Albums found</span>
+    <% } %>
+
+    <% data.albumList.forEach(album => { %>
+    <div class="gridViewItem">
+        <span onclick="openPage('/album?id=<%= album.id %>')" role="link" tabindex="0">
+            <img src="<%= album.artworkPath	 %>" alt="<%= album.title %>">
+
+            <div class="gridViewInfo">
+                <%= album.title %>
+            </div>
+        </span>
+    </div>
+    <% }); %>
+</div>
+<% } %>
+
+<script>
+    document.getElementById('search').focus();
+    document.getElementById('search').addEventListener('keyup', function () {
+        clearTimeout(timer);
+
+        timer = setTimeout(function () {
+            let searchValue = document.getElementById('search').value;
+            openPage('/search?term=' + searchValue);
+        }, 2000);
+    });
+
+</script>
+
+
+<% if(!isAjaxRequest) { %>
+<%- include('templates/footer') %>
+<% } %>

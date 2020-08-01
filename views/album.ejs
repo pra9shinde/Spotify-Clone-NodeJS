@@ -1,0 +1,59 @@
+<% if(!isAjaxRequest) { %>
+<%- include('templates/header') %>
+<% } %>
+<div class="entityInfo">
+    <div class="leftSection">
+        <div class="img-container">
+            <img src="<%= data.albumDet[0].artworkPath %>"
+                alt="<%= data.albumDet[0].title %> - <%= data.artistDet[0].name %>">
+        </div>
+
+    </div>
+
+    <div class="rightSection">
+        <h2><%= data.albumDet[0].title %></h2>
+        <p>By <%= data.artistDet[0].name %></p>
+        <p><%= data.albumDet[0].totalSongs %> Songs</p>
+    </div>
+</div>
+
+<div class="trackListContainer">
+    <ul class="trackList">
+        <% let i = 1; %>
+        <% let songIDS = []; //Store Song ID's in an array for templplaylist array %>
+        <% data.songsList.forEach( song => { %>
+        <li class="trackListRow">
+            <% songIDS.push(song.id); //Push Song ID's in an array  %>
+            <div class="trackCount">
+                <img src="/images/icons/play-white.png" class="play" alt="Play Song"
+                    onclick="setTrack('<%= song.id %>', tempPlaylist, true)">
+                <span class="trackNumber"><%= i %></span>
+            </div>
+
+            <div class="trackInfo">
+                <span class="trackName"><%= song.title %></span>
+                <span class="artistName"><%= song.artistName %></span>
+            </div>
+
+            <div class="trackOptions">
+                <img src="/images/icons/more.png" class="optionsBtn" alt="More Options">
+            </div>
+
+            <div class="trackDuration">
+                <span class="duration"><%= song.duration %></span>
+            </div>
+
+        </li>
+        <% i++; %>
+        <% }); %>
+
+
+        <script>
+            tempPlaylist = JSON.parse('<%- JSON.stringify(songIDS) %>'); //Store Current Album Song IDS into tempPlaylist JS variable
+        </script>
+    </ul>
+</div>
+
+<% if(!isAjaxRequest) { %>
+<%- include('templates/footer') %>
+<% } %>

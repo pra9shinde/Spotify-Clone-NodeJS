@@ -5,41 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="theme-color" content="#ffffff">
+
+
     <link rel="stylesheet" href="/css/register.css">
     <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
 </head>
 
 <body>
+    <script>
+        loggedInUserName = '<%= loggedInUser %>';
+    </script>
 
     <div id="mainContainer">
 
         <div id="topContainer">
             <div id="navbarContainer">
                 <nav class="navBar">
-                    <a href="/" class="logo">
-                        <img src="/images/icons/logo.png" alt="Slotify Logo">
-                    </a>
+                    <span onclick="openPage('/')" role="link" tabindex="0" class="logo">
+                        <img src="/images/Black Logo.png" alt="Slotify Logo">
+                    </span>
 
                     <div class="group">
                         <div class="navItem">
-                            <a href="/search" class="navItemLink">
+                            <span onclick="openPage('/search')" role="link" tabindex="0" class="navItemLink">
                                 Search
                                 <img src="/images/icons/search.png" alt="Search Songs" class="icon">
-                            </a>
+                            </span>
                         </div>
                     </div>
 
                     <div class="group">
                         <div class="navItem">
-                            <a href="/browse" class="navItemLink">Browse</a>
+                            <span onclick="openPage('/browse')" role="link" tabindex="0"
+                                class="navItemLink">Browse</span>
                         </div>
 
                         <div class="navItem">
-                            <a href="/yourmusic" class="navItemLink">Your Music</a>
+                            <span onclick="openPage('/yourmusic')" role="link" tabindex="0" class="navItemLink">Your
+                                Music</span>
                         </div>
 
                         <div class="navItem">
-                            <a href="/profile" class="navItemLink">Pranav Shinde</a>
+                            <span onclick="openPage('/profile')" role="link" tabindex="0"
+                                class="navItemLink"><%= loggedInUser%></span>
                         </div>
                     </div>
                 </nav>

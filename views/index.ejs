@@ -1,20 +1,24 @@
-<%- include('templates/header') %>
+<% if(!isAjaxRequest) { %>
+<!-- If the page is via AJAX then avoid loading header & footer coz, it will load the header, footer twice -->
+<%- include('templates/header', {loggedInUser: loggedInUser}) %>
+<% } %>
 
 <h1 class="page-header-big">You might also like</h1>
 
 <div class="gridViewContainer">
     <% albums.forEach(album => { %>
     <div class="gridViewItem">
-        <a href="/album?id=<%= album.id %>">
+        <span onclick="openPage('/album?id=<%= album.id %>')" role="link" tabindex="0">
             <img src="<%= album.artworkPath	 %>" alt="<%= album.title %>">
 
             <div class="gridViewInfo">
                 <%= album.title %>
-
             </div>
-        </a>
+        </span>
     </div>
     <% }); %>
 </div>
 
+<% if(!isAjaxRequest) { %>
 <%- include('templates/footer') %>
+<% } %>

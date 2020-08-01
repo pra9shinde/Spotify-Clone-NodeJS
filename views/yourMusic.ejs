@@ -1,0 +1,20 @@
+<% if(!isAjaxRequest) { %>
+<!-- If the page is via AJAX then avoid loading header & footer coz, it will load the header, footer twice -->
+<%- include('templates/header', {loggedInUser: loggedInUser}) %>
+<% } %>
+
+<div class="playlistContainer">
+    <div class="gridViewContainer">
+        <h2>PLAYLISTS</h2>
+
+        <div class="buttonItems">
+            <button class="button green" onclick="createPlaylist()">New Playlist</button>
+        </div>
+
+    </div>
+</div>
+
+
+<% if(!isAjaxRequest) { %>
+<%- include('templates/footer') %>
+<% } %>
