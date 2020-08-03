@@ -1,0 +1,284 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 03, 2020 at 06:03 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `slotify`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `albums`
+--
+
+CREATE TABLE `albums` (
+  `id` int(11) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `artist` int(11) NOT NULL,
+  `genre` int(11) NOT NULL,
+  `artworkPath` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `albums`
+--
+
+INSERT INTO `albums` (`id`, `title`, `artist`, `genre`, `artworkPath`) VALUES
+(1, 'Kohinoor', 1, 3, '/images/artwork/kohinoor.jpeg'),
+(2, 'Sadak', 2, 4, '/images/artwork/emiway.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `artists`
+--
+
+CREATE TABLE `artists` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `artists`
+--
+
+INSERT INTO `artists` (`id`, `name`) VALUES
+(1, 'Divine'),
+(2, 'Emiway'),
+(3, 'Ritviz'),
+(4, 'Bilal Saeed');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `genres`
+--
+
+CREATE TABLE `genres` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `genres`
+--
+
+INSERT INTO `genres` (`id`, `name`) VALUES
+(1, 'Rock'),
+(2, 'Pop'),
+(3, 'Hip Hop'),
+(4, 'Rap'),
+(5, 'Classical'),
+(6, 'jazz'),
+(7, 'Indian'),
+(8, 'Classical'),
+(9, 'Techno'),
+(10, 'Pyschedelic'),
+(11, 'Vinatage');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `playlist`
+--
+
+CREATE TABLE `playlist` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `owner` varchar(50) NOT NULL,
+  `dateCreated` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `playlist`
+--
+
+INSERT INTO `playlist` (`id`, `name`, `owner`, `dateCreated`) VALUES
+(1, 'Favourite', 'pranavshnd006@gmail.com', '2020-08-02 11:09:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `playlistsongs`
+--
+
+CREATE TABLE `playlistsongs` (
+  `id` int(11) NOT NULL,
+  `songId` int(11) NOT NULL,
+  `playlistId` int(11) NOT NULL,
+  `playlistOrder` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `playlistsongs`
+--
+
+INSERT INTO `playlistsongs` (`id`, `songId`, `playlistId`, `playlistOrder`) VALUES
+(1, 1, 1, 1),
+(2, 2, 1, 2),
+(5, 4, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `songs`
+--
+
+CREATE TABLE `songs` (
+  `id` int(11) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `artist` int(11) NOT NULL,
+  `album` int(11) NOT NULL,
+  `genre` int(11) NOT NULL,
+  `duration` varchar(8) NOT NULL,
+  `path` varchar(500) NOT NULL,
+  `albumOrder` int(11) NOT NULL,
+  `plays` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `songs`
+--
+
+INSERT INTO `songs` (`id`, `title`, `artist`, `album`, `genre`, `duration`, `path`, `albumOrder`, `plays`) VALUES
+(1, 'Gandhi Money', 1, 1, 3, '02:55', '/music/Gandhi Money - Kohinoor 320 Kbps.mp3', 2, 123),
+(2, 'Kohinoor', 1, 1, 3, '03:18', '/music/Kohinoor - DIVINE.mp3', 1, 112),
+(3, 'Machayenge', 2, 2, 4, '02:33', '/music/Machayenge - Emiway Bantai.mp3', 2, 86),
+(4, 'Sadak', 2, 2, 4, '02:32', '/music/Sadak - Emiway Bantai.mp3', 1, 94);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `signup_time` datetime NOT NULL,
+  `profile_picture` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `email`, `password`, `signup_time`, `profile_picture`) VALUES
+(17, 'pranavshnd006@gmail.com', 'Pranav', 'Shinde', 'pranavshnd006@gmail.com', 'fcb7b61fd0c92c8c2330b4036ecc09dd', '2020-07-18 16:11:51', '/img/head_emerald.png');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `albums`
+--
+ALTER TABLE `albums`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `artists`
+--
+ALTER TABLE `artists`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `genres`
+--
+ALTER TABLE `genres`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `playlist`
+--
+ALTER TABLE `playlist`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `playlistsongs`
+--
+ALTER TABLE `playlistsongs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `songs`
+--
+ALTER TABLE `songs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `albums`
+--
+ALTER TABLE `albums`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `artists`
+--
+ALTER TABLE `artists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `genres`
+--
+ALTER TABLE `genres`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `playlist`
+--
+ALTER TABLE `playlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `playlistsongs`
+--
+ALTER TABLE `playlistsongs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `songs`
+--
+ALTER TABLE `songs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
