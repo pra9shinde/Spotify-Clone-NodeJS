@@ -11,6 +11,7 @@ router.get('/browse', userController.getIndex);
 router.get('/artist', userController.getArtist);//Get Artist Details Page
 router.get('/search', userController.getSearch);//Get Search Page
 router.get('/yourmusic', userController.getYourMusic);//Your Music Page
+router.get('/playlist', userController.getPlaylistView);//Single Playlist Details Page
 
 // Login submit req
 router.post('/login', userController.login);
@@ -26,7 +27,7 @@ router.post('/getArtistByID', userController.getArtistByID); //Get Artist Detail
 router.post('/getAlbumByID', userController.getAlbumByID); //Get Artist Details by ID
 router.post('/updatePlays', userController.updatePlays);//Update song play count when song is played
 router.post('/createPlaylist', userController.createPlaylist); //Create new playlsit
-
+router.post('/deletePlaylist', userController.deletePlaylist); //Delete user playlist
 module.exports = router;
 
 

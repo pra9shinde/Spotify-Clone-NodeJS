@@ -8,31 +8,42 @@ class Songs {
         this.genre = {};
     }
 
+    async createObjects() {
+        //Get Album Details
+        let albumDet = await this.getAllAlbums();
+        albumDet = JSON.parse(JSON.stringify(albumDet[0]));
+        albumDet.forEach(obj => {
+            this.album[obj.id] = obj.title;
+        });
+
+        // Get Artist  Details
+        let artistDet = await this.getAllArtists();
+        artistDet = JSON.parse(JSON.stringify(artistDet[0]));
+        artistDet.forEach(obj => {
+            this.artist[obj.id] = obj.name;
+        });
+
+        // Get Genre Details
+        let genreDet = await this.getAllGenres();
+        genreDet = JSON.parse(JSON.stringify(genreDet[0]));
+        genreDet.forEach(obj => {
+            this.genre[obj.id] = obj.name;
+        });
+    }
+
     // Get Album, Artist, Genres, Song Details
     async getAllAlbumDetails(albumID) {
         let allDetails = {};
+        const objs = await this.createObjects();
 
-        //Get Album Details
+        //Album Details
         let albumDet = await Songs.getAlbumByID(albumID);
         albumDet = JSON.parse(JSON.stringify(albumDet[0]));
-        this.arrangeAlbum(albumDet);
-
-        // Get Artist  Details
-        let artistDet = await Songs.getArtistByID(albumDet[0].artist);
-        artistDet = JSON.parse(JSON.stringify(artistDet[0]));
-        this.arrangeArtist(artistDet);
-
-        // Get Genre Details
-        let genreDet = await Songs.getGenreByID(albumDet[0].genre);
-        genreDet = JSON.parse(JSON.stringify(genreDet[0]));
-        this.arrangeGenre(genreDet);
-
 
         // Get Album Songs
-        let getTotalSongsFromAlbum = await Songs.getTotalSongsFromAlbum(albumDet[0].id);
+        let getTotalSongsFromAlbum = await Songs.getTotalSongsFromAlbum(albumID);
         getTotalSongsFromAlbum = JSON.parse(JSON.stringify(getTotalSongsFromAlbum[0]));
         const totalSongs = getTotalSongsFromAlbum.length;
-
 
         getTotalSongsFromAlbum.forEach(song => {
             song.artistName = this.getArtistName(song.artist);
@@ -41,33 +52,15 @@ class Songs {
         });
 
         allDetails.albumDet = albumDet;
-        allDetails.artistDet = artistDet;
+        allDetails.artistName = this.artist[albumDet[0].artist];
         allDetails.songsList = getTotalSongsFromAlbum;
-        allDetails.albumDet[0].totalSongs = totalSongs;
+        allDetails.totalSongs = totalSongs;
 
-        if (albumDet.length > 0 && artistDet.length > 0) {
+        if (albumDet.length > 0 && this.artist[albumDet[0].artist]) {
             return allDetails;
         } else {
             return false;
         }
-    }
-
-    arrangeAlbum(arrObj) {
-        arrObj.forEach(obj => {
-            this.album[obj.id] = obj.title;
-        });
-    }
-
-    arrangeArtist(arrObj) {
-        arrObj.forEach(obj => {
-            this.artist[obj.id] = obj.name;
-        });
-    }
-
-    arrangeGenre(arrObj) {
-        arrObj.forEach(obj => {
-            this.genre[obj.id] = obj.name;
-        });
     }
 
     getAlbumName(id) {
@@ -87,7 +80,7 @@ class Songs {
     }
 
     static async getSongByID(id) {
-        return await db.execute("SELECT * from songs WHERE id= ?", [id]);
+        return db.execute("SELECT * from songs WHERE id= ?", [id]);
     }
 
     static fetchAllAlbums() {
@@ -128,6 +121,17 @@ class Songs {
             .catch(e => console.log(e));
     }
 
+    getAllAlbums() {
+        return db.execute("SELECT * from albums");
+    }
+
+    getAllArtists() {
+        return db.execute("SELECT * from artists");
+    }
+
+    getAllGenres() {
+        return db.execute("SELECT * from genres");
+    }
 }
 
 module.exports = Songs;

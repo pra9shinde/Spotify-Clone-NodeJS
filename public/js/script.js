@@ -64,6 +64,18 @@ class Audio {
     }
 }
 
+//Events to hide options menu
+$(document).click(function (click) {
+    let target = $(click.target);
+    if (!target.hasClass('item') && !target.hasClass('optionsBtn')) {
+        hideOptionsMenu();
+    }
+});
+//Events to hide options menu
+$(window).scroll(function () {
+    hideOptionsMenu();
+});
+
 //function to get html page content like AJAX to keep Single Page App feel. Used instead of <a> tag
 function openPage(url) {
     if (timer != null) {
@@ -75,7 +87,8 @@ function openPage(url) {
         url = url + '?';
     }
 
-    let encodedURL = encodeURI(url + '?userLoggedIn=' + loggedInUserName);
+    // let encodedURL = encodeURI(url + '?userLoggedIn=' + loggedInUserName);
+    let encodedURL = encodeURI(url);
     $('#mainContent').load(encodedURL);
     $('body').scrollTop(0);//Scroll top when new page is loaded
     history.pushState(null, null, url); //Add the url to browser's URL coz load() function keeps base url only 
@@ -194,6 +207,30 @@ function setShuffle() {
 
 }
 
+//Add to playlist,share button event
+function showOptionsMenu(button) {
+    let menu = $('.optionsMenu');
+    let menuWidth = menu.width();
+
+    let scrollTop = $(window).scrollTop(); //Distance from top of the document
+    let elementOffset = $(button).offset().top; //Distance from top to button element
+
+    let top = elementOffset - scrollTop;
+    let left = $(button).position().left;
+
+    menu.css({ 'top': top + 'px', 'left': left - menuWidth + 'px', 'display': 'inline' });
+}
+
+
+
+//hide options menu
+function hideOptionsMenu() {
+    let menu = $('.optionsMenu');
+    if (menu.css('display') != 'none') {
+        menu.css('display', 'none');
+    }
+}
+
 function shuffleArray(arr) {
     let j, x, i;
     for (i = arr.length; i; i--) {
@@ -307,7 +344,7 @@ function setAlbum(id) {
 }
 
 //Create New Playlist
-function createPlaylist(username) {
+function createPlaylist() {
     const playlistName = prompt('Please enter the name of your playlist');
     if (playlistName !== null) {
         $.ajax({
@@ -323,6 +360,28 @@ function createPlaylist(username) {
                 } else {
                     window.location.href = 'http://localhost:3000/register';
                 }
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+    }
+}
+
+//Delete Playlist
+function deletePlaylist(id) {
+    const prompt = confirm('Are you sure yo want to delete this playlist?');
+
+    if (prompt) {
+        $.ajax({
+            url: 'http://localhost:3000/deletePlaylist',
+            type: 'POST',
+            data: {
+                playlistId: id
+            },
+            dataType: 'json',
+            success: function (res) {
+                openPage('/yourmusic');
             },
             error: function (e) {
                 console.log(e.responseText);

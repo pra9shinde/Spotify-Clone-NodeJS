@@ -11,6 +11,22 @@
             <button class="button green" onclick="createPlaylist()">New Playlist</button>
         </div>
 
+        <% if(userPlaylists.length === 0) { %>
+        <span class="noResult">You don't have any playlist, Please create a new playlist</span>
+        <% } %>
+
+        <% userPlaylists.forEach(playlist => { %>
+        <div class="gridViewItem" role="link" tabindex="0" onclick="openPage('/playlist?id=<%= playlist.id %>')">
+            <div class="playlistImage">
+                <img src="/images/icons/playlist.png" alt="<%= playlist.name %>">
+            </div>
+
+            <div class="gridViewInfo">
+                <%= playlist.name %>
+            </div>
+        </div>
+        <% }); %>
+
     </div>
 </div>
 

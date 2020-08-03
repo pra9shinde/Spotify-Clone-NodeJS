@@ -55,13 +55,19 @@ exports.getAlbum = (req, res, next) => {
 	if (albumID) {
 		let songs = new Songs();
 
-		songs.getAllAlbumDetails(albumID)
+		let userPlaylist;
+		//Get Users playlists
+		getUserPlaylists(req.session.loggedinUser)
+			.then(playlist => {
+				userPlaylist = playlist;
+				return songs.getAllAlbumDetails(albumID);
+			})
 			.then(result => {
 				if (!result) {
 					res.redirect('/');
 				} else {
 					// console.log(result.albumDet);
-					res.render('album', { title: "ExpressMusicX - Album Details", data: result, loggedInUser: req.session.loggedinUserFullName, isAjaxRequest: req.xhr });
+					res.render('album', { title: "ExpressMusicX - Album Details", data: result, loggedInUser: req.session.loggedinUserFullName, isAjaxRequest: req.xhr, userPlaylist: userPlaylist });
 				}
 			})
 			.catch(e => console.log(e));
@@ -140,6 +146,7 @@ exports.getSearch = (req, res, next) => {
 		.catch(e => console.log(e));
 };
 
+//Your Music View
 exports.getYourMusic = (req, res, next) => {
 	if (!req.session.loggedinUser) {
 		return res.render("register", {
@@ -149,11 +156,59 @@ exports.getYourMusic = (req, res, next) => {
 		});
 	}
 
-	res.render('yourMusic', {
-		title: "ExpressMusicX | Your Music",
-		loggedInUser: req.session.loggedinUserFullName,
-		isAjaxRequest: req.xhr
-	});
+	const user = new User(req.session.loggedinUser);
+	user.getUserPlaylist()
+		.then(result => {
+			res.render('yourMusic', {
+				title: "ExpressMusicX | Your Music",
+				loggedInUser: req.session.loggedinUserFullName,
+				isAjaxRequest: req.xhr,
+				userPlaylists: result
+			});
+		})
+		.catch(e => console.log(e));
+};
+
+//Get Single Playlist Details Page 
+exports.getPlaylistView = (req, res, next) => {
+	if (!req.session.loggedinUser) {
+		return res.render("register", {
+			title: "ExpressMusicX - Register",
+			formData: data,
+			loginUsername: ''
+		});
+	}
+
+	const playlistId = req.query.id;
+
+	let details = {};
+	const user = new User();
+
+	let userPlaylist;
+	//Get Users all playlists
+	getUserPlaylists(req.session.loggedinUser)
+		.then(playlist => {
+			userPlaylist = playlist;
+			return user.getPlaylistbyID(playlistId);
+		})
+		.then(result => {
+			details.playListName = result.name;
+			details.playListUser = req.session.loggedinUserFullName;
+			return user.getPlaylistSongs(playlistId);
+		})
+		.then(playlistSongs => {
+			details.songsCount = playlistSongs.length;
+			details.songsList = playlistSongs;
+			res.render('playlist', {
+				title: "ExpressMusicX | Playlist",
+				loggedInUser: req.session.loggedinUserFullName,
+				isAjaxRequest: req.xhr,
+				data: details,
+				playlistId: playlistId,
+				userPlaylist: userPlaylist
+			});
+		})
+		.catch(e => console.log(e));
 };
 
 
@@ -289,9 +344,37 @@ exports.createPlaylist = (req, res, next) => {
 			})
 			.catch(e => console.log(e));
 	} else {
-		res.json({ status: 'Failure', res: 'Username not found' });
+		res.json({ status: 'Failure', res: 'Session Expired' });
 	}
 };
+
+//Delete playlist
+exports.deletePlaylist = (req, res, next) => {
+	const playlistID = req.body.playlistId;
+	const username = req.session.loggedinUser;
+
+	if (username) {
+		const user = new User(username);
+		user.deletePlaylist(playlistID)
+			.then(result => {
+				res.json({ status: 'Success', res: result });
+			})
+			.catch(e => console.log(e));
+	} else {
+		res.json({ status: 'Failure', res: 'Session Expired' });
+	}
+
+}
+
+//Function to get playlist dropdown of the user
+function getUserPlaylists(username) {
+	const userObj = new User(username);
+	return userObj.getUserPlaylist()
+		.then(resp => {
+			return resp;
+		})
+		.catch(e => console.log(e));
+}
 
 
 // remove all html tags if user inserts into text input

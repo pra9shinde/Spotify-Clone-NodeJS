@@ -3,16 +3,17 @@
 <% } %>
 <div class="entityInfo">
     <div class="leftSection">
-        <div class="img-container">
-            <img src="<%= data.albumDet[0].artworkPath %>" alt="<%= data.albumDet[0].title %> - <%= data.artistName %>">
+        <div class="img-container playlistImage">
+            <img src="/images/icons/playlist.png" alt="">
         </div>
 
     </div>
 
     <div class="rightSection">
-        <h2><%= data.albumDet[0].title %></h2>
-        <p>By <%= data.artistName %></p>
-        <p><%= data.albumDet[0].totalSongs %> Songs</p>
+        <h2><%= data.playListName %></h2>
+        <p>By <%= data.playListUser %></p>
+        <p><%= data.songsCount %> Songs</p>
+        <button class="button" onclick="deletePlaylist('<%= playlistId %>')">DELETE PLAYLIST</button>
     </div>
 </div>
 
@@ -63,7 +64,6 @@
     </select>
     <div class="item">Share link</div>
 </nav>
-
 
 <% if(!isAjaxRequest) { %>
 <%- include('templates/footer') %>
