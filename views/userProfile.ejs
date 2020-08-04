@@ -1,0 +1,21 @@
+<% if(!isAjaxRequest) { %>
+<%- include('templates/header') %>
+<% } %>
+
+<div class="entityInfo">
+    <div class="centerSection">
+        <div class="userInfo">
+            <h1><%= loggedInUser %></h1>
+        </div>
+    </div>
+
+    <div class="buttonItems">
+        <button class="button" onclick="openPage('/updateDetails')">USER DETAILS</button>
+        <button class="button" onclick="logout('<%= username %>')">LOGOUT</button>
+    </div>
+</div>
+
+
+<% if(!isAjaxRequest) { %>
+<%- include('templates/footer') %>
+<% } %>

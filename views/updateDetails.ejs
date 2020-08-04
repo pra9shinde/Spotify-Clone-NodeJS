@@ -1,0 +1,25 @@
+<% if(!isAjaxRequest) { %> <%- include('templates/header') %> <% } %>
+
+<div class="userDetails">
+    <div class="container borderBottom">
+        <h2>EMAIL</h2>
+        <input type="text" class="email textInput" name="email" id="email" placeholder="Email Address"
+            value="<%= data.email %>" />
+        <span class="message" id="updateEmailSpan"></span>
+        <button class="button" onclick="updateUserEmail('<%= data.username %>')">SAVE</button>
+    </div>
+
+    <div class="container">
+        <h2>PASSWORD</h2>
+        <input type="password" class="oldPassword textInput" name="oldPassword" id="oldPassword"
+            placeholder="Current Password" />
+        <input type="password" class="newPassword1 textInput" name="newPassword1" id="newPassword1"
+            placeholder="New Password" />
+        <input type="password" class="newPassword2 textInput" name="newPassword2" id="newPassword2"
+            placeholder="Confirm Password" />
+        <span class="message" id="passwordSpan"></span>
+        <button class="button" onclick="updateUserPassword('<%= data.username %>')">SAVE</button>
+    </div>
+</div>
+
+<% if(!isAjaxRequest) { %> <%- include('templates/footer') %> <% } %>

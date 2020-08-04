@@ -1,49 +1,48 @@
-let currentPlayList = [];//store the playlist
-let shufflePlayList = [];//store the Shuffle playlist
-let tempPlaylist = [];//Store playlist temporarily when user switches to another album
+let currentPlayList = []; //store the playlist
+let shufflePlayList = []; //store the Shuffle playlist
+let tempPlaylist = []; //Store playlist temporarily when user switches to another album
 
-let audioElement;//store the Audio class object
+let audioElement; //store the Audio class object
 let mouseDown = false; //Flag for song progressbar clicks
 
 let currentSongIndex = 0; //Holds the index of currently playing song
 let repeat = false; //Repeat Song after playing flag
-let shuffle = false;//Suffle Songs Flag
+let shuffle = false; //Suffle Songs Flag
 let timer; //Search page timer
 
-
 let loggedInUserName;
-
 
 // class to handle audio API of browser
 class Audio {
     constructor() {
-        this.currentlyPlaying;//current playing song
-        this.audio = document.createElement('audio');//create a html audio element
+        this.currentlyPlaying; //current playing song
+        this.audio = document.createElement("audio"); //create a html audio element
 
         // Update Song Duration in UI, Event fires when audio is ready to play
-        this.audio.addEventListener('canplay', function () {
+        this.audio.addEventListener("canplay", function () {
             // here 'this' refers to the event object of the audio
             const duration = formatTime(this.duration);
-            document.querySelector('.progressTime.remaining').innerText = duration;
+            document.querySelector(
+                ".progressTime.remaining"
+            ).innerText = duration;
         });
 
         // EVENT when song is playing
-        this.audio.addEventListener('timeupdate', function () {
+        this.audio.addEventListener("timeupdate", function () {
             if (this.duration) {
                 updateTimeProgressBar(this);
             }
         });
 
         // Volume change event
-        this.audio.addEventListener('volumechange', function () {
+        this.audio.addEventListener("volumechange", function () {
             updateVolumeProgressBar(this);
         });
 
         // Song ends - EVENT listener
-        this.audio.addEventListener('ended', function () {
+        this.audio.addEventListener("ended", function () {
             nextSong();
-        })
-
+        });
     }
 
     setTrack(track) {
@@ -67,7 +66,7 @@ class Audio {
 //Events to hide options menu
 $(document).click(function (click) {
     let target = $(click.target);
-    if (!target.hasClass('item') && !target.hasClass('optionsBtn')) {
+    if (!target.hasClass("item") && !target.hasClass("optionsBtn")) {
         hideOptionsMenu();
     }
 });
@@ -82,23 +81,21 @@ function openPage(url) {
         clearTimeout(timer); //clear timer, user sometimes click link before timeout is finished hence clear it
     }
 
-
-    if (url.indexOf('?') === -1) {
-        url = url + '?';
+    if (url.indexOf("?") === -1) {
+        url = url + "?";
     }
 
     // let encodedURL = encodeURI(url + '?userLoggedIn=' + loggedInUserName);
     let encodedURL = encodeURI(url);
-    $('#mainContent').load(encodedURL);
-    $('body').scrollTop(0);//Scroll top when new page is loaded
-    history.pushState(null, null, url); //Add the url to browser's URL coz load() function keeps base url only 
+    $("#mainContent").load(encodedURL);
+    $("body").scrollTop(0); //Scroll top when new page is loaded
+    history.pushState(null, null, url); //Add the url to browser's URL coz load() function keeps base url only
 }
-
 
 // Pause the song
 function pauseSong() {
-    $('.control-btn.pause').hide();
-    $('.control-btn.play').show();
+    $(".control-btn.pause").hide();
+    $(".control-btn.play").show();
     audioElement.pause();
 }
 
@@ -106,33 +103,38 @@ function pauseSong() {
 function formatTime(seconds) {
     let time = Math.round(seconds);
     let minutes = Math.floor(time / 60);
-    let second = time - (minutes * 60);
+    let second = time - minutes * 60;
 
     if (second < 10) {
-        second = '0' + second;
+        second = "0" + second;
     }
-    return minutes + ':' + second;
+    return minutes + ":" + second;
 }
 
 // Skip the Song on progressbar click
 function timeFromOffset(mouse, progressBar) {
-    let percentage = mouse.offsetX / progressBar.getBoundingClientRect().width * 100;
+    let percentage =
+        (mouse.offsetX / progressBar.getBoundingClientRect().width) * 100;
     let seconds = audioElement.audio.duration * (percentage / 100);
     audioElement.setTime(seconds);
 }
 
 //Update the progress bar as the music is playing
 function updateTimeProgressBar(audio) {
-    document.querySelector('.progressTime.current').innerText = formatTime(audio.currentTime);
+    document.querySelector(".progressTime.current").innerText = formatTime(
+        audio.currentTime
+    );
     // document.querySelector('.progressTime.remaining').innerText = formatTime(audio.duration - audio.currentTime);
-    let progress = audio.currentTime / audio.duration * 100;
-    document.querySelector('.playbackBar .progress').style.width = `${progress}%`;
+    let progress = (audio.currentTime / audio.duration) * 100;
+    document.querySelector(
+        ".playbackBar .progress"
+    ).style.width = `${progress}%`;
 }
 
 // Update the volume progress bar on change
 function updateVolumeProgressBar(audio) {
     let volume = audio.volume * 100;
-    document.querySelector('.volumeBar .progress').style.width = `${volume}%`;
+    document.querySelector(".volumeBar .progress").style.width = `${volume}%`;
 }
 
 // Next Song
@@ -150,7 +152,9 @@ function nextSong() {
     } else {
         currentSongIndex++;
     }
-    let trackToPlay = shuffle ? shufflePlayList[currentSongIndex] : currentPlayList[currentSongIndex];
+    let trackToPlay = shuffle
+        ? shufflePlayList[currentSongIndex]
+        : currentPlayList[currentSongIndex];
     setTrack(trackToPlay, currentPlayList, true);
 }
 
@@ -173,15 +177,19 @@ function prevSong() {
 // Change Repeat mode
 function setRepeat() {
     repeat = !repeat;
-    let repeatImage = repeat ? 'repeat-active.png' : 'repeat.png';
-    document.querySelector('.control-btn.repeat img').src = '/images/icons/' + repeatImage;
+    let repeatImage = repeat ? "repeat-active.png" : "repeat.png";
+    document.querySelector(".control-btn.repeat img").src =
+        "/images/icons/" + repeatImage;
 }
 
 // Change Mute Unmute
 function setMute() {
     audioElement.audio.muted = !audioElement.audio.muted;
-    let repeatImage = audioElement.audio.muted ? 'volume-mute.png' : 'volume.png';
-    document.querySelector('.control-btn.volume img').src = '/images/icons/' + repeatImage;
+    let repeatImage = audioElement.audio.muted
+        ? "volume-mute.png"
+        : "volume.png";
+    document.querySelector(".control-btn.volume img").src =
+        "/images/icons/" + repeatImage;
 }
 
 // Play first song of the album(artist page)
@@ -192,25 +200,31 @@ function playFirst() {
 // Shuffle Playlist
 function setShuffle() {
     shuffle = !shuffle;
-    let repeatImage = shuffle ? 'shuffle-active.png' : 'shuffle.png';
-    document.querySelector('.control-btn.shuffle img').src = '/images/icons/' + repeatImage;
+    let repeatImage = shuffle ? "shuffle-active.png" : "shuffle.png";
+    document.querySelector(".control-btn.shuffle img").src =
+        "/images/icons/" + repeatImage;
 
     if (shuffle) {
         // Randomize playlist
         shuffleArray(shufflePlayList);
-        currentSongIndex = shufflePlayList.indexOf(audioElement.currentlyPlaying.id);
+        currentSongIndex = shufflePlayList.indexOf(
+            audioElement.currentlyPlaying.id
+        );
     } else {
         // Regular Playlist
-        currentSongIndex = currentPlayList.indexOf(audioElement.currentlyPlaying.id);
-
+        currentSongIndex = currentPlayList.indexOf(
+            audioElement.currentlyPlaying.id
+        );
     }
-
 }
 
 //Add to playlist,share button event
 function showOptionsMenu(button) {
-    let menu = $('.optionsMenu');
+    const songId = $(button).prevAll(".songId").val();
+
+    let menu = $(".optionsMenu");
     let menuWidth = menu.width();
+    document.getElementById("songId").value = songId;
 
     let scrollTop = $(window).scrollTop(); //Distance from top of the document
     let elementOffset = $(button).offset().top; //Distance from top to button element
@@ -218,16 +232,18 @@ function showOptionsMenu(button) {
     let top = elementOffset - scrollTop;
     let left = $(button).position().left;
 
-    menu.css({ 'top': top + 'px', 'left': left - menuWidth + 'px', 'display': 'inline' });
+    menu.css({
+        top: top + "px",
+        left: left - menuWidth + "px",
+        display: "inline",
+    });
 }
-
-
 
 //hide options menu
 function hideOptionsMenu() {
-    let menu = $('.optionsMenu');
-    if (menu.css('display') != 'none') {
-        menu.css('display', 'none');
+    let menu = $(".optionsMenu");
+    if (menu.css("display") != "none") {
+        menu.css("display", "none");
     }
 }
 
@@ -241,28 +257,27 @@ function shuffleArray(arr) {
     }
 }
 
-
 /**************** AJAX Calls ******************/
 // Play the song
 function playSong() {
-    // Update song listen count only if song is freshly played 
+    // Update song listen count only if song is freshly played
     if (audioElement.audio.currentTime === 0) {
         $.ajax({
-            url: 'http://localhost:3000/updatePlays',
-            type: 'POST',
+            url: "http://localhost:3000/updatePlays",
+            type: "POST",
             data: { songid: audioElement.currentlyPlaying.id },
-            dataType: 'json',
+            dataType: "json",
             success: function (result) {
                 // console.log(result);
             },
             error: function (e) {
                 console.log(e);
-            }
+            },
         });
     }
 
-    $('.control-btn.play').hide();
-    $('.control-btn.pause').show();
+    $(".control-btn.play").hide();
+    $(".control-btn.pause").show();
     audioElement.play();
 }
 
@@ -285,16 +300,17 @@ function setTrack(trackId, newPlaylist, play) {
     pauseSong(); //Pause the song if already playing
 
     $.ajax({
-        url: 'http://localhost:3000/getSongByID',
-        type: 'POST',
+        url: "http://localhost:3000/getSongByID",
+        type: "POST",
         data: { songId: trackId },
-        dataType: 'json',
+        dataType: "json",
         success: function (result) {
             audioElement = new Audio(); //Create audio object
             audioElement.setTrack(result.songDetails); //set playing track
 
             //Update Track Details on UI
-            document.querySelectorAll('.trackName span')[0].innerText = result.songDetails.title;
+            document.querySelectorAll(".trackName span")[0].innerText =
+                result.songDetails.title;
             setArtist(result.songDetails.artist);
             setAlbum(result.songDetails.album);
 
@@ -304,88 +320,246 @@ function setTrack(trackId, newPlaylist, play) {
         },
         error: function (e) {
             console.log(e.responseText);
-        }
+        },
     });
 }
 
 // Set Artist Name in Now Playing Section via AJAX
 function setArtist(id) {
     $.ajax({
-        url: 'http://localhost:3000/getArtistByID',
-        type: 'POST',
+        url: "http://localhost:3000/getArtistByID",
+        type: "POST",
         data: { artistId: id },
-        dataType: 'json',
+        dataType: "json",
         success: function (result) {
-            document.querySelectorAll('.trackInfo .artistName span')[0].innerText = result.artistDetails.name;
-            document.querySelectorAll('.trackInfo .artistName span')[0].setAttribute("onclick", "openPage('/artist?id=" + id + "')"); //make it clickable link
+            document.querySelectorAll(
+                ".trackInfo .artistName span"
+            )[0].innerText = result.artistDetails.name;
+            document
+                .querySelectorAll(".trackInfo .artistName span")[0]
+                .setAttribute("onclick", "openPage('/artist?id=" + id + "')"); //make it clickable link
         },
         error: function (e) {
             console.log(e.responseText);
-        }
+        },
     });
 }
 
 // Set Album Image in Now Playing Section via AJAX
 function setAlbum(id) {
     $.ajax({
-        url: 'http://localhost:3000/getAlbumByID',
-        type: 'POST',
+        url: "http://localhost:3000/getAlbumByID",
+        type: "POST",
         data: { albumId: id },
-        dataType: 'json',
+        dataType: "json",
         success: function (result) {
-            document.querySelectorAll('.content .albumLink img')[0].src = result.albumDetails.artworkPath;
-            document.querySelectorAll('.trackInfo .trackName span')[0].setAttribute("onclick", "openPage('/album?id=" + id + "')"); //make it clickable link
-            document.querySelectorAll('.content img')[0].setAttribute("onclick", "openPage('/album?id=" + id + "')"); //make it clickable link
+            document.querySelectorAll(".content .albumLink img")[0].src =
+                result.albumDetails.artworkPath;
+            document
+                .querySelectorAll(".trackInfo .trackName span")[0]
+                .setAttribute("onclick", "openPage('/album?id=" + id + "')"); //make it clickable link
+            document
+                .querySelectorAll(".content img")[0]
+                .setAttribute("onclick", "openPage('/album?id=" + id + "')"); //make it clickable link
         },
         error: function (e) {
             console.log(e.responseText);
-        }
+        },
     });
 }
 
 //Create New Playlist
 function createPlaylist() {
-    const playlistName = prompt('Please enter the name of your playlist');
+    const playlistName = prompt("Please enter the name of your playlist");
     if (playlistName !== null) {
         $.ajax({
-            url: 'http://localhost:3000/createPlaylist',
-            type: 'POST',
+            url: "http://localhost:3000/createPlaylist",
+            type: "POST",
             data: {
-                name: playlistName
+                name: playlistName,
             },
-            dataType: 'json',
+            dataType: "json",
             success: function (res) {
-                if (res.status === 'Success') {
-                    openPage('/yourmusic');
+                if (res.status === "Success") {
+                    openPage("/yourmusic");
                 } else {
-                    window.location.href = 'http://localhost:3000/register';
+                    window.location.href = "http://localhost:3000/register";
                 }
             },
             error: function (e) {
                 console.log(e.responseText);
-            }
+            },
         });
     }
 }
 
 //Delete Playlist
 function deletePlaylist(id) {
-    const prompt = confirm('Are you sure yo want to delete this playlist?');
+    const prompt = confirm("Are you sure yo want to delete this playlist?");
 
     if (prompt) {
         $.ajax({
-            url: 'http://localhost:3000/deletePlaylist',
-            type: 'POST',
+            url: "http://localhost:3000/deletePlaylist",
+            type: "POST",
             data: {
-                playlistId: id
+                playlistId: id,
             },
-            dataType: 'json',
+            dataType: "json",
             success: function (res) {
-                openPage('/yourmusic');
+                openPage("/yourmusic");
             },
             error: function (e) {
                 console.log(e.responseText);
+            },
+        });
+    }
+}
+
+//Add song to playlist on dropdown select
+$(document).on("change", "select.playlist", function () {
+    const selectEl = $(this);
+    const playlistId = selectEl.val();
+    const songId = document.getElementById("songId").value;
+    $.ajax({
+        url: "http://localhost:3000/addToPlaylist",
+        type: "POST",
+        data: {
+            playlistId: playlistId,
+            songId: songId,
+        },
+        dataType: "json",
+        success: function (res) {
+            if (res.status === "Failed") {
+                alert("Error : Request Data Missing");
+            } else {
+                alert("Song added to playlist");
+                hideOptionsMenu();
+                selectEl.val("");
             }
+        },
+        error: function (e) {
+            console.log(e.responseText);
+        },
+    });
+});
+
+//Remove song from playlist
+function removeFromPlaylist(button, playlistId) {
+    const songId = $(button).prevAll(".songId").val();
+
+    $.ajax({
+        url: "http://localhost:3000/deleteFromPlaylist",
+        type: "POST",
+        data: {
+            playlistId: playlistId,
+            songId: songId,
+        },
+        dataType: "json",
+        success: function (res) {
+            if (res.status === "Failed") {
+                alert("Error : Request Data Missing");
+            } else {
+                openPage("/playlist?id=" + playlistId);
+            }
+        },
+        error: function (e) {
+            console.log(e.responseText);
+        },
+    });
+}
+
+//Update User Email from edit profile page
+function updateUserEmail(username) {
+    const email = document.getElementById("email").value;
+    if (username && email) {
+        $.ajax({
+            url: "http://localhost:3000/updateUserEmail",
+            type: "POST",
+            data: {
+                email: email,
+                username: username,
+            },
+            dataType: "json",
+            success: function (res) {
+                const emailSpanEl = document.getElementById("updateEmailSpan");
+                if (res.status === "Failed") {
+                    emailSpanEl.className = "message red";
+                    emailSpanEl.innerText = res.res;
+                } else {
+                    emailSpanEl.className = "message green";
+                    emailSpanEl.innerText = "Email Updated Successfully";
+                    // window.location.href = "http://localhost:3000/register";
+                }
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            },
+        });
+    } else {
+        alert("Something went wrong");
+    }
+}
+
+//Function to change user password
+function updateUserPassword(username) {
+    const oldPassword = document.getElementById("oldPassword").value;
+    const newPassword1 = document.getElementById("newPassword1").value;
+    const newPassword2 = document.getElementById("newPassword2").value;
+    if (username && oldPassword && newPassword1 && newPassword2) {
+        $.ajax({
+            url: "http://localhost:3000/changeUserPassword",
+            type: "POST",
+            data: {
+                oldPassword: oldPassword,
+                newPassword1: newPassword1,
+                newPassword2: newPassword2,
+                username: username,
+            },
+            dataType: "json",
+            success: function (res) {
+                const emailSpanEl = document.getElementById("passwordSpan");
+                if (res.status === "Failed") {
+                    emailSpanEl.className = "message red";
+                    emailSpanEl.innerText = res.res;
+                } else {
+                    emailSpanEl.className = "message green";
+                    emailSpanEl.innerText =
+                        "Password Updated Successfully, Redirecting to login with new password";
+                    setTimeout(function () {
+                        logout(username);
+                    }, 3000);
+                }
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            },
+        });
+    } else {
+        alert("Something Went Wrong");
+    }
+}
+
+function logout(username) {
+    if (!username) {
+        window.location.href = "http://localhost:3000/register";
+    } else {
+        $.ajax({
+            url: "http://localhost:3000/logout",
+            type: "POST",
+            data: {
+                username: username,
+            },
+            dataType: "json",
+            success: function (res) {
+                if (res.status === "Failed") {
+                    alert("Failed logging out");
+                } else {
+                    window.location.href = "http://localhost:3000/register";
+                }
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            },
         });
     }
 }
@@ -393,10 +567,10 @@ function deletePlaylist(id) {
 // AJAX call to get random playlist
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:3000/getPlaylist',
-        type: 'GET',
+        url: "http://localhost:3000/getPlaylist",
+        type: "GET",
         data: {},
-        dataType: 'json',
+        dataType: "json",
         success: function (res) {
             let newPlayList = res.playlistArray;
             audioElement = new Audio(); //create audio object
@@ -405,37 +579,38 @@ $(document).ready(function () {
         },
         error: function (e) {
             console.log(e.responseText);
-        }
+        },
     });
-
 
     /*------------- Event Listeners --------------*/
-    $('#nowPlayingBarContainer').on('mousedown touchstart mousemove touchmove', function (e) {
-        e.preventDefault();
-    });
+    $("#nowPlayingBarContainer").on(
+        "mousedown touchstart mousemove touchmove",
+        function (e) {
+            e.preventDefault();
+        }
+    );
 
     // Progressbar skip song event
-    const progressBarEl = document.querySelector('.playbackBar .progressBar');
-    progressBarEl.addEventListener('mousedown', function () {
+    const progressBarEl = document.querySelector(".playbackBar .progressBar");
+    progressBarEl.addEventListener("mousedown", function () {
         mouseDown = true;
     });
-    progressBarEl.addEventListener('mousemove', function (e) {
+    progressBarEl.addEventListener("mousemove", function (e) {
         if (mouseDown) {
             // Set Time of the song depending on the posotion of the click
             timeFromOffset(e, progressBarEl);
         }
     });
-    progressBarEl.addEventListener('mouseup', function (e) {
+    progressBarEl.addEventListener("mouseup", function (e) {
         timeFromOffset(e, progressBarEl);
     });
 
-
     // Change Volume Bar events
-    const volumeBarEl = document.querySelector('.volumeBar .progressBar');
-    volumeBarEl.addEventListener('mousedown', function () {
+    const volumeBarEl = document.querySelector(".volumeBar .progressBar");
+    volumeBarEl.addEventListener("mousedown", function () {
         mouseDown = true;
     });
-    volumeBarEl.addEventListener('mousemove', function (e) {
+    volumeBarEl.addEventListener("mousemove", function (e) {
         if (mouseDown) {
             // Set Volume song depending on the posotion of the click
             const percent = e.offsetX / this.getBoundingClientRect().width;
@@ -444,7 +619,7 @@ $(document).ready(function () {
             }
         }
     });
-    volumeBarEl.addEventListener('mouseup', function (e) {
+    volumeBarEl.addEventListener("mouseup", function (e) {
         const percent = e.offsetX / this.getBoundingClientRect().width;
         if (percent >= 0 && percent <= 1) {
             audioElement.audio.volume = percent;
@@ -452,12 +627,10 @@ $(document).ready(function () {
     });
 
     //close the event when user mouseup anywhere in the document
-    document.addEventListener('mouseup', function () {
+    document.addEventListener("mouseup", function () {
         mouseDown = false;
     });
 
     /*------------- Event Listeners --------------*/
-
 });
 /**************** AJAX Calls ******************/
-

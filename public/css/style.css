@@ -1,41 +1,37 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     color: #fff;
-    font-family:  "Helvetica Neue", "Helvetica" , "Arial", sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     background-color: #181818;
     font-size: 14px;
     min-width: 720px;
 }
 
-[role="link"]{
+[role="link"] {
     cursor: pointer;
 }
 
-#nowPlayingBarContainer{
+#nowPlayingBarContainer {
     width: 100%;
     background-color: #282828;
     position: fixed;
     bottom: 0;
     min-width: 620px;
-
 }
 
-
-
-#nowPlayingbar{
+#nowPlayingbar {
     display: flex;
     height: 90px;
     padding: 16px;
-    
 }
 
-#nowPlayingLeft, 
-#nowPlayingRight{
+#nowPlayingLeft,
+#nowPlayingRight {
     width: 30%;
     min-width: 180px;
 }
@@ -45,7 +41,7 @@ body{
     margin-top: 30px;
 }
 
-#nowPlayingCenter{
+#nowPlayingCenter {
     width: 40%;
     max-width: 700px;
     display: flex;
@@ -53,98 +49,97 @@ body{
     align-items: center;
 }
 
-.nowPlayingbar .content{
+.nowPlayingbar .content {
     width: 100%;
 }
 
-.btns{
+.btns {
     margin: 0 auto;
     display: table;
-
 }
 
-.control-btn{
+.control-btn {
     background-color: transparent;
     border: 0;
     vertical-align: middle;
     margin: 0 5px;
 }
 
-.control-btn img{
+.control-btn img {
     height: 20px;
     width: 20px;
 }
 
 .control-btn.play img,
-.control-btn.pause img{
+.control-btn.pause img {
     height: 32px;
     width: 32px;
 }
 
-.control-btn:hover{
+.control-btn:hover {
     cursor: pointer;
 }
 
-.playbackBar{
+.playbackBar {
     display: flex;
     min-width: 500px;
 }
 
-.progressTime{
+.progressTime {
     color: #a0a0a0;
     font-size: 11px;
     min-width: 40px;
     text-align: center;
 }
 
-.progressBar{
+.progressBar {
     width: 100%;
     height: 12px;
     display: inline-flex;
     cursor: pointer;
 }
 
-.progressBarBG{
+.progressBarBG {
     background-color: #404040;
     height: 4px;
     width: 100%;
     border-radius: 2px;
 }
 
-.progress{
+.progress {
     background-color: #a0a0a0;
     height: 4px;
     width: 0;
     border-radius: 2px;
 }
 
-.playbackBar .progressBar{
+.playbackBar .progressBar {
     margin-top: 3px;
 }
 
-#nowPlayingLeft .albumArtWork{
+#nowPlayingLeft .albumArtWork {
     max-width: 57px;
     margin-right: 15px;
     float: left;
     background-size: cover;
 }
 
-#nowPlayingLeft .trackInfo{
+#nowPlayingLeft .trackInfo {
     display: table;
 }
 
-#nowPlayingLeft .trackInfo .trackName{
+#nowPlayingLeft .trackInfo .trackName {
     margin: 6px 0;
     display: inline-block;
     width: 100%;
 }
 
-#nowPlayingLeft .trackInfo .artistName span{
+#nowPlayingLeft .trackInfo .artistName span {
     font-size: 12px;
     color: #a0a0aa;
 }
 
-.volumeBar{
+.volumeBar {
     width: 180px;
     position: absolute;
     right: 0;
@@ -152,16 +147,16 @@ body{
     align-items: center;
 }
 
-.volumeBar .progressBar{
+.volumeBar .progressBar {
     width: 125px;
 }
 
-#topContainer{
+#topContainer {
     min-height: 100%;
     width: 100%;
 }
 
-#navbarContainer{
+#navbarContainer {
     width: 220px;
     background-color: #000;
     height: 100vh;
@@ -170,43 +165,43 @@ body{
     top: 0;
 }
 
-.navBar{
+.navBar {
     padding: 25px;
     display: flex;
     flex-direction: column;
     -ms-flex-direction: column;
 }
 
-.navBar a{
+.navBar a {
     color: #a0a0a0;
     text-decoration: none;
 }
 
-.logo{
+.logo {
     margin: 10px 0;
 }
 
-.logo img{
+.logo img {
     /* width: 40px; */
     width: 170px;
 }
 
-.navItemLink .icon{
+.navItemLink .icon {
     position: absolute;
     right: 0;
     top: 6px;
     width: 25px;
 }
 
-.navItemLink:hover{
-    color:#fff;
+.navItemLink:hover {
+    color: #fff;
 }
 
-.navBar .group{
+.navBar .group {
     border-top: 1px solid #a0a0a0;
 }
 
-.navItem{
+.navItem {
     padding: 10px 0;
     font-size: 14px;
     font-weight: 700;
@@ -215,23 +210,22 @@ body{
     position: relative;
 }
 
-
-#mainViewContainer{
+#mainViewContainer {
     margin-left: 220px;
     padding-bottom: 90px;
     width: calc(100% - 220px);
 }
 
-#mainContent{
+#mainContent {
     padding: 0 20px;
 }
 
-.page-header-big{
+.page-header-big {
     padding: 20px;
     text-align: center;
 }
 
-.gridViewItem{
+.gridViewItem {
     display: inline-block;
     margin-right: 20px;
     width: 29%;
@@ -240,18 +234,18 @@ body{
     margin-bottom: 20px;
 }
 
-.gridViewItem img{
+.gridViewItem img {
     width: 100%;
     border-radius: 25px;
-    box-shadow: 18px 12px 26px rgba(0, 0, 0, .9);
+    box-shadow: 18px 12px 26px rgba(0, 0, 0, 0.9);
 }
 
-.gridViewItem a{
+.gridViewItem a {
     text-decoration: none;
     color: #fff;
 }
 
-.gridViewInfo{
+.gridViewInfo {
     text-align: center;
     padding: 5px 0;
     text-overflow: ellipsis;
@@ -262,46 +256,45 @@ body{
     letter-spacing: 1px;
 }
 
-.entityInfo{
+.entityInfo {
     padding: 40px 0 10px 0;
     display: inline-block;
     width: 100%;
 }
 
-.leftSection{
+.leftSection {
     width: 30%;
     float: left;
     max-width: 250px;
 }
 
-.leftSection img{
+.leftSection img {
     width: 100%;
     border-radius: 50%;
     position: relative;
     box-shadow: 1px 1px 15px rgb(86 85 85);
 }
 
-.img-container{
+.img-container {
     position: relative;
 }
 
-.img-container::after{
-    content: '';
+.img-container::after {
+    content: "";
     background-color: #fff;
     border-radius: 50%;
     position: absolute;
     left: 49%;
     width: 25px;
     height: 25px;
-    transform: translate(-50%,50%);
+    transform: translate(-50%, 50%);
     top: 40%;
 }
 
-.rightSection{
+.rightSection {
     width: 70%;
     float: left;
     padding: 35px 10px 5px 40px;
-    
 }
 
 .entityInfo .rightSection h2 {
@@ -310,101 +303,99 @@ body{
     letter-spacing: 1px;
 }
 
-.entityInfo .rightSection p{
+.entityInfo .rightSection p {
     color: #939393;
     font-weight: 200;
     font-size: 18px;
     margin-bottom: 10px;
 }
 
-
-.trackListRow{
+.trackListRow {
     height: 55px;
     padding: 10px 10px;
     list-style: none;
     margin-bottom: 20px;
-
 }
 
-.trackListRow span{
+.trackListRow span {
     color: #939393;
     font-weight: 200;
 }
 
-.trackListRow:hover{
+.trackListRow:hover {
     background-color: #282828;
 }
 
-.trackListRow .trackCount{
+.trackListRow .trackCount {
     width: 8%;
     float: left;
 }
 
-.trackCount{
+.trackCount {
     position: relative;
 }
 
-.trackListRow .trackCount img{
+.trackListRow .trackCount img {
     width: 25px;
     visibility: hidden;
     position: absolute;
     cursor: pointer;
 }
 
-.trackListRow:hover .trackCount img{
+.trackListRow:hover .trackCount img {
     visibility: visible;
 }
 
-.trackListRow:hover .trackCount span{
+.trackListRow:hover .trackCount span {
     visibility: hidden;
 }
 
-.trackListRow .trackInfo{
+.trackListRow .trackInfo {
     width: 75%;
     float: left;
 }
 
-.trackListRow .trackInfo span{
+.trackListRow .trackInfo span {
     display: block;
 }
 
-.trackListRow .trackOptions{
+.trackListRow .trackOptions {
     width: 5%;
     float: left;
     text-align: right;
 }
 
-.trackListRow .trackOptions img{
+.trackListRow .trackOptions img {
     width: 20px;
     visibility: hidden;
 }
 
-.trackListRow:hover .trackOptions img{
+.trackListRow:hover .trackOptions img {
     visibility: visible;
 }
 
-.trackListRow .trackDuration{
+.trackListRow .trackDuration {
     width: 12%;
     float: left;
     text-align: right;
 }
 
-.trackInfo .trackName{
+.trackInfo .trackName {
     color: #fff;
     margin-bottom: 5px;
 }
 
 .trackCount,
 .trackOptions,
-.trackDuration{
+.trackDuration {
     margin-top: 5px;
 }
 
-.artistInfo{
+.artistInfo {
     text-align: center;
 }
 
-.button{
+.button {
     color: #fff;
     background-color: transparent;
     cursor: pointer;
@@ -417,69 +408,69 @@ body{
     min-width: 130px;
 }
 
-.button.green{
+.button.green {
     background-color: #2ebd59;
     border-color: #2ebd59;
 }
 
-.borderBottom{
+.borderBottom {
     border-bottom: 2px solid #9393935e;
     margin-bottom: 10px;
 }
 
 .trackListContainer h2,
-.gridViewContainer h2{
+.gridViewContainer h2 {
     text-align: center;
     margin-bottom: 10px;
-}   
+}
 
-.button:focus{
+.button:focus {
     outline: 0;
 }
 
-.searchContainer{
+.searchContainer {
     background-color: #242424;
     padding: 20px 28px;
 }
 
-.searchContainer h4{
+.searchContainer h4 {
     font-weight: 300px;
 }
 
-.searchContainer input[type="text"]{
+.searchContainer input[type="text"] {
     width: 100%;
     background-color: transparent;
     border: 0;
     color: #fff;
     font-weight: 700;
-    font-family:  "Helvetica Neue", "Helvetica" , "Arial", sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 62px;
     letter-spacing: 2px;
     padding: 10px 0;
 }
 
-.searchContainer input[type="text"]:focus{
+.searchContainer input[type="text"]:focus {
     outline: 0;
 }
 
-.searchResultRow{
+.searchResultRow {
     padding: 15px 10px;
 }
 
-.searchResultRow:hover{
+.searchResultRow:hover {
     background-color: #282828;
 }
 
-.searchResultRow .artistName span{
+.searchResultRow .artistName span {
     color: #fff;
 }
 
-.artistsContainer h2{
+.artistsContainer h2 {
     text-align: center;
     margin-bottom: 10px;
 }
 
-.noResult{
+.noResult {
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 1px;
@@ -491,47 +482,46 @@ body{
 
 .gridViewContainer h2,
 .artistsContainer h2,
-.trackListContainer h2 
-{
+.trackListContainer h2 {
     letter-spacing: 2px;
 }
 
-.playlistContainer{
+.playlistContainer {
     margin: 20px 0;
 }
 
-.buttonItems{
+.buttonItems {
     margin: 0 0 20px 0;
 }
 
-.buttonItems button{
+.buttonItems button {
     display: block;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
-.gridViewItem .playlistImage{
+.gridViewItem .playlistImage {
     padding: 10px;
 }
 
-.gridViewItem .playlistImage img{
+.gridViewItem .playlistImage img {
     border: 2px solid #282828;
 }
 
-.leftSection .playlistImage img{
+.leftSection .playlistImage img {
     border: 2px solid #282828;
 }
 
-.optionsMenu{
+.optionsMenu {
     position: fixed;
     background-color: #282828;
     width: 200px;
-    border: 1px solid rgba(0, 0, 0, .15);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 3px;
     z-index: 1000;
     display: none;
 }
 
-.optionsMenu .item{
+.optionsMenu .item {
     width: 100%;
     padding: 12px 20px;
     box-sizing: border-box;
@@ -543,13 +533,13 @@ body{
     background-color: #282828;
 }
 
-.optionsMenu .item:hover{
+.optionsMenu .item:hover {
     color: #fff;
     background-color: #333;
     border-color: #333;
 }
 
-.optionsMenu select{
+.optionsMenu select {
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -560,6 +550,58 @@ body{
     padding: 20px 10px;
 }
 
-.optionsMenu select:focus{
+.optionsMenu select:focus {
     outline: none;
+}
+
+.userInfo h1 {
+    text-align: center;
+}
+
+.userDetails {
+    padding: 20px;
+}
+
+.userDetails .container h2 {
+    text-align: center;
+}
+
+.userDetails .container input[type="text"],
+.userDetails .container input[type="password"] {
+    display: block;
+    margin: 16px auto;
+}
+
+.userDetails .textInput {
+    margin: 10px auto;
+    background-color: #1f1f1f;
+    border: 0;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+    width: 100%;
+    height: 60px;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.userDetails .textInput:focus {
+    outline: 1px solid #757567;
+}
+
+.userDetails .container button {
+    display: block;
+    margin: 20px auto;
+}
+
+.message {
+    padding: 0 10px;
+}
+
+.message.green {
+    color: #07d159;
+}
+
+.message.red {
+    color: #e40020;
 }

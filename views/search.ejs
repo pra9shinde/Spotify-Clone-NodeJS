@@ -41,7 +41,8 @@
             </div>
 
             <div class="trackOptions">
-                <img src="/images/icons/more.png" class="optionsBtn" alt="More Options">
+                <input type="hidden" class="songId" value="<%= song.id %>">
+                <img src="/images/icons/more.png" class="optionsBtn" alt="More Options" onclick="showOptionsMenu(this)">
             </div>
 
             <div class="trackDuration">
@@ -95,6 +96,18 @@
     <% }); %>
 </div>
 <% } %>
+
+<nav class="optionsMenu">
+    <input type="hidden" class="songId" id="songId">
+    <select class="item playlist">
+        <option value="">Add to playlist</option>
+        <% userPlaylist.forEach(playlist => { %>
+        <option value="<%= playlist.id %>"><%= playlist.name%></option>
+        <% }); %>
+    </select>
+    <div class="item">Share link</div>
+</nav>
+
 
 <script>
     document.getElementById('search').focus();

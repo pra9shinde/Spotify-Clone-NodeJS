@@ -36,6 +36,7 @@
             </div>
 
             <div class="trackOptions">
+                <input type="hidden" class="songId" value="<%= song.id %>">
                 <img src="/images/icons/more.png" class="optionsBtn" alt="More Options" onclick="showOptionsMenu(this)">
             </div>
 
@@ -55,14 +56,15 @@
 </div>
 
 <nav class="optionsMenu">
-    <input type="hidden" class="songId">
-    <select class="item playlist" name="" id="">
-        <option value="-1">Add to playlist</option>
+    <input type="hidden" class="songId" id="songId">
+    <select class="item playlist">
+        <option value="">Add to playlist</option>
         <% userPlaylist.forEach(playlist => { %>
         <option value="<%= playlist.id %>"><%= playlist.name%></option>
         <% }); %>
+
     </select>
-    <div class="item">Share link</div>
+    <div class="item" onclick="removeFromPlaylist(this, '<%= playlistId %>')">Remove from playlist</div>
 </nav>
 
 <% if(!isAjaxRequest) { %>
