@@ -22,6 +22,7 @@ exports.getIndex = (req, res, next) => {
             title: "ExpressMusicX - Register",
             formData: data,
             loginUsername: "",
+            baseURL: process.env.BASE_URL,
         });
     }
 
@@ -34,6 +35,7 @@ exports.getIndex = (req, res, next) => {
                 albums: result,
                 loggedInUser: req.session.loggedinUserFullName,
                 isAjaxRequest: req.xhr,
+                baseURL: process.env.BASE_URL,
             });
         })
         .catch((e) => {
@@ -48,6 +50,7 @@ exports.getRegister = (req, res, next) => {
             title: "ExpressMusicX - Register",
             formData: data,
             loginUsername: "",
+            baseURL: process.env.BASE_URL,
         });
     } catch (e) {
         res.redirect("/500");
@@ -61,6 +64,7 @@ exports.getAlbum = (req, res, next) => {
             title: "ExpressMusicX - Register",
             formData: data,
             loginUsername: "",
+            baseURL: process.env.BASE_URL,
         });
     }
 
@@ -86,6 +90,7 @@ exports.getAlbum = (req, res, next) => {
                         loggedInUser: req.session.loggedinUserFullName,
                         isAjaxRequest: req.xhr,
                         userPlaylist: userPlaylist,
+                        baseURL: process.env.BASE_URL,
                     });
                 }
             })
@@ -104,6 +109,7 @@ exports.getArtist = (req, res, next) => {
             title: "ExpressMusicX - Register",
             formData: data,
             loginUsername: "",
+            baseURL: process.env.BASE_URL,
         });
     }
 
@@ -125,6 +131,7 @@ exports.getArtist = (req, res, next) => {
                     isAjaxRequest: req.xhr,
                     data: result,
                     userPlaylist: userPlaylist,
+                    baseURL: process.env.BASE_URL,
                 });
             })
             .catch((e) => {
@@ -142,6 +149,7 @@ exports.getSearch = (req, res, next) => {
             title: "ExpressMusicX - Register",
             formData: data,
             loginUsername: "",
+            baseURL: process.env.BASE_URL,
         });
     }
 
@@ -182,6 +190,7 @@ exports.getSearch = (req, res, next) => {
                 isAjaxRequest: req.xhr,
                 term: term,
                 userPlaylist: userPlaylist,
+                baseURL: process.env.BASE_URL,
             });
         })
         .catch((e) => {
@@ -207,6 +216,7 @@ exports.getYourMusic = (req, res, next) => {
                 loggedInUser: req.session.loggedinUserFullName,
                 isAjaxRequest: req.xhr,
                 userPlaylists: result,
+                baseURL: process.env.BASE_URL,
             });
         })
         .catch((e) => {
@@ -221,6 +231,7 @@ exports.getPlaylistView = (req, res, next) => {
             title: "ExpressMusicX - Register",
             formData: data,
             loginUsername: "",
+            baseURL: process.env.BASE_URL,
         });
     }
 
@@ -251,6 +262,7 @@ exports.getPlaylistView = (req, res, next) => {
                 data: details,
                 playlistId: playlistId,
                 userPlaylist: userPlaylist,
+                baseURL: process.env.BASE_URL,
             });
         })
         .catch((e) => {
@@ -274,6 +286,7 @@ exports.getProfile = (req, res, next) => {
             loggedInUser: req.session.loggedinUserFullName,
             isAjaxRequest: req.xhr,
             username: req.session.loggedinUser,
+            baseURL: process.env.BASE_URL,
         });
     } catch (e) {
         res.redirect("/500");
@@ -287,6 +300,7 @@ exports.getupdateDetails = (req, res, next) => {
             title: "ExpressMusicX - Register",
             formData: data,
             loginUsername: "",
+            baseURL: process.env.BASE_URL,
         });
     }
 
@@ -298,6 +312,7 @@ exports.getupdateDetails = (req, res, next) => {
                 loggedInUser: req.session.loggedinUserFullName,
                 isAjaxRequest: req.xhr,
                 data: result,
+                baseURL: process.env.BASE_URL,
             });
         })
         .catch((e) => {
@@ -323,6 +338,7 @@ exports.login = (req, res, next) => {
                     formData: data,
                     loginUsername: username,
                     src: "login",
+                    baseURL: process.env.BASE_URL,
                 });
             } else {
                 req.session.loggedinUser = username;
@@ -360,6 +376,7 @@ exports.register = (req, res, next) => {
                     formData: data,
                     loginUsername: username,
                     src: "reg",
+                    baseURL: process.env.BASE_URL,
                 });
             }
         })

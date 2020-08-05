@@ -12,6 +12,8 @@ let timer; //Search page timer
 
 let loggedInUserName;
 
+let base_url;
+
 // class to handle audio API of browser
 class Audio {
     constructor() {
@@ -263,7 +265,7 @@ function playSong() {
     // Update song listen count only if song is freshly played
     if (audioElement.audio.currentTime === 0) {
         $.ajax({
-            url: "http://localhost:3000/updatePlays",
+            url: base_url + "updatePlays",
             type: "POST",
             data: { songid: audioElement.currentlyPlaying.id },
             dataType: "json",
@@ -300,7 +302,7 @@ function setTrack(trackId, newPlaylist, play) {
     pauseSong(); //Pause the song if already playing
 
     $.ajax({
-        url: "http://localhost:3000/getSongByID",
+        url: base_url + "getSongByID",
         type: "POST",
         data: { songId: trackId },
         dataType: "json",
@@ -327,7 +329,7 @@ function setTrack(trackId, newPlaylist, play) {
 // Set Artist Name in Now Playing Section via AJAX
 function setArtist(id) {
     $.ajax({
-        url: "http://localhost:3000/getArtistByID",
+        url: base_url + "getArtistByID",
         type: "POST",
         data: { artistId: id },
         dataType: "json",
@@ -348,7 +350,7 @@ function setArtist(id) {
 // Set Album Image in Now Playing Section via AJAX
 function setAlbum(id) {
     $.ajax({
-        url: "http://localhost:3000/getAlbumByID",
+        url: base_url + "getAlbumByID",
         type: "POST",
         data: { albumId: id },
         dataType: "json",
@@ -373,7 +375,7 @@ function createPlaylist() {
     const playlistName = prompt("Please enter the name of your playlist");
     if (playlistName !== null) {
         $.ajax({
-            url: "http://localhost:3000/createPlaylist",
+            url: base_url + "createPlaylist",
             type: "POST",
             data: {
                 name: playlistName,
@@ -383,7 +385,7 @@ function createPlaylist() {
                 if (res.status === "Success") {
                     openPage("/yourmusic");
                 } else {
-                    window.location.href = "http://localhost:3000/register";
+                    window.location.href = base_url + "register";
                 }
             },
             error: function (e) {
@@ -399,7 +401,7 @@ function deletePlaylist(id) {
 
     if (prompt) {
         $.ajax({
-            url: "http://localhost:3000/deletePlaylist",
+            url: base_url + "deletePlaylist",
             type: "POST",
             data: {
                 playlistId: id,
@@ -421,7 +423,7 @@ $(document).on("change", "select.playlist", function () {
     const playlistId = selectEl.val();
     const songId = document.getElementById("songId").value;
     $.ajax({
-        url: "http://localhost:3000/addToPlaylist",
+        url: base_url + "addToPlaylist",
         type: "POST",
         data: {
             playlistId: playlistId,
@@ -448,7 +450,7 @@ function removeFromPlaylist(button, playlistId) {
     const songId = $(button).prevAll(".songId").val();
 
     $.ajax({
-        url: "http://localhost:3000/deleteFromPlaylist",
+        url: base_url + "deleteFromPlaylist",
         type: "POST",
         data: {
             playlistId: playlistId,
@@ -473,7 +475,7 @@ function updateUserEmail(username) {
     const email = document.getElementById("email").value;
     if (username && email) {
         $.ajax({
-            url: "http://localhost:3000/updateUserEmail",
+            url: base_url + "updateUserEmail",
             type: "POST",
             data: {
                 email: email,
@@ -507,7 +509,7 @@ function updateUserPassword(username) {
     const newPassword2 = document.getElementById("newPassword2").value;
     if (username && oldPassword && newPassword1 && newPassword2) {
         $.ajax({
-            url: "http://localhost:3000/changeUserPassword",
+            url: base_url + "changeUserPassword",
             type: "POST",
             data: {
                 oldPassword: oldPassword,
@@ -541,10 +543,10 @@ function updateUserPassword(username) {
 
 function logout(username) {
     if (!username) {
-        window.location.href = "http://localhost:3000/register";
+        window.location.href = base_url + "register";
     } else {
         $.ajax({
-            url: "http://localhost:3000/logout",
+            url: base_url + "logout",
             type: "POST",
             data: {
                 username: username,
@@ -554,7 +556,7 @@ function logout(username) {
                 if (res.status === "Failed") {
                     alert("Failed logging out");
                 } else {
-                    window.location.href = "http://localhost:3000/register";
+                    window.location.href = base_url + "register";
                 }
             },
             error: function (e) {
@@ -566,8 +568,9 @@ function logout(username) {
 
 // AJAX call to get random playlist
 $(document).ready(function () {
+    base_url = document.getElementById("base_url").value;
     $.ajax({
-        url: "http://localhost:3000/getPlaylist",
+        url: base_url + "getPlaylist",
         type: "GET",
         data: {},
         dataType: "json",

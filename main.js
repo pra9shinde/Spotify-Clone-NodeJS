@@ -1,3 +1,5 @@
+process.env.BASE_URL = "http://localhost:3000/";
+
 const http = require("http");
 const path = require("path");
 
@@ -5,12 +7,19 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 
+//
+const helmet = require("helmet"); //Adds Secure Response Headers to Each Request
+const compression = require("compression"); //Compress data and sends to response automatically
+
 const db = require("./util/database");
 
 // Controllers
 const userController = require("./controllers/user");
 
 const app = express();
+
+app.use(helmet());
+app.use(compression());
 
 // Templating Engine Setup
 app.set("view engine", "ejs");
@@ -46,7 +55,7 @@ const server = http.createServer(app);
 db.getConnection()
     .then((conn) => {
         console.log("DB Connection Successfull");
-        server.listen(3000);
+        server.listen(process.env.PORT || 3000);
     })
     .catch((e) => {
         console.log("DB Connection Error");
