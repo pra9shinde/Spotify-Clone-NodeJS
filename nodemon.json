@@ -1,5 +1,9 @@
 {
     "env": {
-        "BASE_URL": "http://localhost:3000/"
+        "BASE_URL": "http://localhost:3000/",
+        "DB_HOST": "localhost",
+        "DB_USER": "root",
+        "DB_PASSWORD": "We1c0me@123",
+        "DB_NAME": "slotify"
     }
 }

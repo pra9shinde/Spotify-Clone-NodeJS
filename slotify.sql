@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2020 at 06:03 PM
+-- Generation Time: Aug 05, 2020 at 02:03 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -130,9 +130,8 @@ CREATE TABLE `playlistsongs` (
 --
 
 INSERT INTO `playlistsongs` (`id`, `songId`, `playlistId`, `playlistOrder`) VALUES
-(1, 1, 1, 1),
-(2, 2, 1, 2),
-(5, 4, 1, 3);
+(1, 2, 1, 1),
+(3, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -157,10 +156,10 @@ CREATE TABLE `songs` (
 --
 
 INSERT INTO `songs` (`id`, `title`, `artist`, `album`, `genre`, `duration`, `path`, `albumOrder`, `plays`) VALUES
-(1, 'Gandhi Money', 1, 1, 3, '02:55', '/music/Gandhi Money - Kohinoor 320 Kbps.mp3', 2, 123),
-(2, 'Kohinoor', 1, 1, 3, '03:18', '/music/Kohinoor - DIVINE.mp3', 1, 112),
-(3, 'Machayenge', 2, 2, 4, '02:33', '/music/Machayenge - Emiway Bantai.mp3', 2, 86),
-(4, 'Sadak', 2, 2, 4, '02:32', '/music/Sadak - Emiway Bantai.mp3', 1, 94);
+(1, 'Gandhi Money', 1, 1, 3, '02:55', '/music/Gandhi Money - Kohinoor 320 Kbps.mp3', 2, 127),
+(2, 'Kohinoor', 1, 1, 3, '03:18', '/music/Kohinoor - DIVINE.mp3', 1, 118),
+(3, 'Machayenge', 2, 2, 4, '02:33', '/music/Machayenge - Emiway Bantai.mp3', 2, 89),
+(4, 'Sadak', 2, 2, 4, '02:32', '/music/Sadak - Emiway Bantai.mp3', 1, 100);
 
 -- --------------------------------------------------------
 
@@ -258,7 +257,7 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `playlistsongs`

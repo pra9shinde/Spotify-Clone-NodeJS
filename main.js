@@ -1,4 +1,4 @@
-process.env.BASE_URL = "http://localhost:3000/";
+// process.env.BASE_URL = "http://localhost:3000";
 
 const http = require("http");
 const path = require("path");
@@ -12,7 +12,6 @@ const helmet = require("helmet"); //Adds Secure Response Headers to Each Request
 const compression = require("compression"); //Compress data and sends to response automatically
 
 const db = require("./util/database");
-
 // Controllers
 const userController = require("./controllers/user");
 
