@@ -37,17 +37,21 @@ exports.getIndex = (req, res, next) => {
             });
         })
         .catch((e) => {
-            console.log(e);
+            res.redirect("/500");
         });
 };
 
 // Register page view
 exports.getRegister = (req, res, next) => {
-    res.render("register", {
-        title: "ExpressMusicX - Register",
-        formData: data,
-        loginUsername: "",
-    });
+    try {
+        res.render("register", {
+            title: "ExpressMusicX - Register",
+            formData: data,
+            loginUsername: "",
+        });
+    } catch (e) {
+        res.redirect("/500");
+    }
 };
 
 // Single Album Details Page
@@ -85,7 +89,9 @@ exports.getAlbum = (req, res, next) => {
                     });
                 }
             })
-            .catch((e) => console.log(e));
+            .catch((e) => {
+                res.redirect("/500");
+            });
     } else {
         res.redirect("/");
     }
@@ -121,7 +127,9 @@ exports.getArtist = (req, res, next) => {
                     userPlaylist: userPlaylist,
                 });
             })
-            .catch((e) => console.log(e));
+            .catch((e) => {
+                res.redirect("/500");
+            });
     } else {
         res.redirect("/");
     }
@@ -176,7 +184,9 @@ exports.getSearch = (req, res, next) => {
                 userPlaylist: userPlaylist,
             });
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+            res.redirect("/500");
+        });
 };
 
 //Your Music View
@@ -199,7 +209,9 @@ exports.getYourMusic = (req, res, next) => {
                 userPlaylists: result,
             });
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+            res.redirect("/500");
+        });
 };
 
 //Get Single Playlist Details Page
@@ -241,25 +253,31 @@ exports.getPlaylistView = (req, res, next) => {
                 userPlaylist: userPlaylist,
             });
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+            res.redirect("/500");
+        });
 };
 
 //Get User Profile Page
 exports.getProfile = (req, res, next) => {
-    if (!req.session.loggedinUser) {
-        return res.render("register", {
-            title: "ExpressMusicX - Register",
-            formData: data,
-            loginUsername: "",
-        });
-    }
+    try {
+        if (!req.session.loggedinUser) {
+            return res.render("register", {
+                title: "ExpressMusicX - Register",
+                formData: data,
+                loginUsername: "",
+            });
+        }
 
-    res.render("userProfile", {
-        title: "ExpressMusicX | Profile",
-        loggedInUser: req.session.loggedinUserFullName,
-        isAjaxRequest: req.xhr,
-        username: req.session.loggedinUser,
-    });
+        res.render("userProfile", {
+            title: "ExpressMusicX | Profile",
+            loggedInUser: req.session.loggedinUserFullName,
+            isAjaxRequest: req.xhr,
+            username: req.session.loggedinUser,
+        });
+    } catch (e) {
+        res.redirect("/500");
+    }
 };
 
 //Get Profile Edit Page
@@ -282,7 +300,9 @@ exports.getupdateDetails = (req, res, next) => {
                 data: result,
             });
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+            res.redirect("/500");
+        });
 };
 
 /**------- Post Requests -----------**/
@@ -311,7 +331,7 @@ exports.login = (req, res, next) => {
             }
         })
         .catch((e) => {
-            console.log(e);
+            res.redirect("/500");
         });
 };
 
@@ -342,6 +362,9 @@ exports.register = (req, res, next) => {
                     src: "reg",
                 });
             }
+        })
+        .catch((e) => {
+            res.redirect("/500");
         });
 };
 
@@ -426,7 +449,7 @@ exports.deletePlaylist = (req, res, next) => {
     const playlistID = req.body.playlistId;
     const username = req.session.loggedinUser;
 
-    if (username && playlistId) {
+    if (username && playlistID) {
         const user = new User(username);
         user.deletePlaylist(playlistID)
             .then((result) => {
@@ -598,6 +621,8 @@ exports.logout = (req, res, next) => {
         return res.json({ status: "Success", res: "Loggedout Successfully" });
     });
 };
+
+/**************/
 
 //Function to get playlist dropdown of the user
 function getUserPlaylists(username) {
