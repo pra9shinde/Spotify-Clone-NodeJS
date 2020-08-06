@@ -238,6 +238,7 @@ body {
     width: 100%;
     border-radius: 25px;
     box-shadow: 18px 12px 26px rgba(0, 0, 0, 0.9);
+    max-height: 200px;
 }
 
 .gridViewItem a {
