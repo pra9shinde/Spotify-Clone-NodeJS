@@ -1,6 +1,6 @@
 <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="ExpressMusicX__A_Spotify_Clone_0"></a>ExpressMusicX - A Spotify Clone</h1>
-<p class="has-line-data" data-line-start="2" data-line-end="3"><a href="https://nodesource.com/products/nsolid"><img src="https://cldup.com/dTxpPi9lDf.thumb.png" alt="N|Solid"></a></p>
-<p class="has-line-data" data-line-start="4" data-line-end="5"><a href="https://travis-ci.org/joemccann/dillinger"><img src="https://travis-ci.org/joemccann/dillinger.svg?branch=master" alt="Build Status"></a></p>
+
+<p class="has-line-data" data-line-start="4" data-line-end="5"><a href="#"><img src="https://travis-ci.org/joemccann/dillinger.svg?branch=master" alt="Build Status"></a></p>
 <p class="has-line-data" data-line-start="6" data-line-end="7">ExpressMusic X is a Spotify clone web application. Following are the technologies used</p>
 <ul>
 <li class="has-line-data" data-line-start="8" data-line-end="9">Frontend : HTML5, CSS3, Javascript, Jquery &amp; AJAX</li>
