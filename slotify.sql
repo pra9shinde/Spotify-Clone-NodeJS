@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2020 at 02:03 PM
+-- Generation Time: Aug 06, 2020 at 12:01 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -41,7 +41,10 @@ CREATE TABLE `albums` (
 
 INSERT INTO `albums` (`id`, `title`, `artist`, `genre`, `artworkPath`) VALUES
 (1, 'Kohinoor', 1, 3, '/images/artwork/kohinoor.jpeg'),
-(2, 'Sadak', 2, 4, '/images/artwork/emiway.jpg');
+(2, 'Sadak', 2, 4, '/images/artwork/emiway.jpg'),
+(3, 'Lm3allem', 5, 2, '/images/artwork/saad-lamjarrad.jpeg'),
+(4, 'No Makeup', 4, 12, '/images/artwork/Bilal-Saeed.jpg'),
+(5, 'Liggi', 3, 9, '/images/artwork/Ritviz.jpg');
 
 -- --------------------------------------------------------
 
@@ -62,7 +65,8 @@ INSERT INTO `artists` (`id`, `name`) VALUES
 (1, 'Divine'),
 (2, 'Emiway'),
 (3, 'Ritviz'),
-(4, 'Bilal Saeed');
+(4, 'Bilal Saeed'),
+(5, 'Saad Lamjarred');
 
 -- --------------------------------------------------------
 
@@ -90,7 +94,8 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (8, 'Classical'),
 (9, 'Techno'),
 (10, 'Pyschedelic'),
-(11, 'Vinatage');
+(11, 'Vinatage'),
+(12, 'Punjabi');
 
 -- --------------------------------------------------------
 
@@ -159,7 +164,13 @@ INSERT INTO `songs` (`id`, `title`, `artist`, `album`, `genre`, `duration`, `pat
 (1, 'Gandhi Money', 1, 1, 3, '02:55', '/music/Gandhi Money - Kohinoor 320 Kbps.mp3', 2, 127),
 (2, 'Kohinoor', 1, 1, 3, '03:18', '/music/Kohinoor - DIVINE.mp3', 1, 118),
 (3, 'Machayenge', 2, 2, 4, '02:33', '/music/Machayenge - Emiway Bantai.mp3', 2, 89),
-(4, 'Sadak', 2, 2, 4, '02:32', '/music/Sadak - Emiway Bantai.mp3', 1, 100);
+(4, 'Sadak', 2, 2, 4, '02:32', '/music/Sadak - Emiway Bantai.mp3', 1, 100),
+(5, 'Lm3allem', 5, 3, 2, '03:56', '/music/Saad Lamjarred - Lm3allem.mp3', 1, 1),
+(6, 'Ghaltana', 5, 3, 2, '3:58', '/music/Saad Lamjarred - Ghaltana.mp3', 2, 0),
+(7, 'No Make Up', 4, 4, 12, '3:30', '/music/No Make Up - Bohemia n Bilal Saeed 320Kbps.mp3', 1, 0),
+(8, 'Lethal Combination', 4, 4, 12, '3:46', '/music/Lethal Combination - Bilal Saeed feat Roach Killa - 320Kbps.mp3', 2, 0),
+(9, 'Liggi', 3, 5, 9, '3:11', '/music/Liggi - Ritviz 192Kbps(DJPubg.Com).mp3', 1, 0),
+(10, 'Sage', 3, 5, 9, '4:04', '/music/Sage - Ritviz 192Kbps(DJPubg.Com).mp3', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -239,19 +250,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `albums`
 --
 ALTER TABLE `albums`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `playlist`
@@ -269,7 +280,7 @@ ALTER TABLE `playlistsongs`
 -- AUTO_INCREMENT for table `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`

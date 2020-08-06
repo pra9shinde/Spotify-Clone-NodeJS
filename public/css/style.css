@@ -274,6 +274,7 @@ body {
     border-radius: 50%;
     position: relative;
     box-shadow: 1px 1px 15px rgb(86 85 85);
+    max-height: 250px;
 }
 
 .img-container {
@@ -605,4 +606,53 @@ body {
 
 .message.red {
     color: #e40020;
+}
+
+@media only screen and (max-width: 900px) {
+    body {
+        max-height: 400px;
+        height: 100%;
+    }
+
+    #nowPlayingbar {
+        padding: 10px;
+    }
+
+    #nowPlayingLeft,
+    #nowPlayingRight {
+        width: 25%;
+        min-width: 80px;
+    }
+
+    #nowPlayingCenter {
+        width: 50%;
+    }
+
+    #nowPlayingCenter .content.playerControls {
+        width: 100%;
+    }
+
+    .playbackBar {
+        min-width: 100px;
+    }
+
+    .volumeBar {
+        right: -20px;
+    }
+
+    #navbarContainer {
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 780px) {
+    .gridViewItem {
+        width: 45%;
+        max-width: unset;
+        min-width: unset;
+    }
+
+    .gridViewItem img {
+        max-height: unset;
+    }
 }
