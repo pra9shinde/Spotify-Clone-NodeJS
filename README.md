@@ -5,6 +5,7 @@
 <ul>
 <li class="has-line-data" data-line-start="8" data-line-end="9">Frontend : HTML5, CSS3, Javascript, Jquery &amp; AJAX</li>
 <li class="has-line-data" data-line-start="9" data-line-end="10">Backend : NodeJS, Express</li>
+<li class="has-line-data" data-line-start="10" data-line-end="12">Templating Engine : EJS</li>
 <li class="has-line-data" data-line-start="10" data-line-end="12">Database : Mysql</li>
 </ul>
 <h1 class="code-line" data-line-start=12 data-line-end=13 ><a id="New_Features_12"></a>New Features!</h1>
