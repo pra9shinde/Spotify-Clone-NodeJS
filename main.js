@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 
 //
-const helmet = require("helmet"); //Adds Secure Response Headers to Each Request
+// const helmet = require("helmet"); //Adds Secure Response Headers to Each Request
 const compression = require("compression"); //Compress data and sends to response automatically
 
 const db = require("./util/database");
@@ -17,7 +17,7 @@ const userController = require("./controllers/user");
 
 const app = express();
 
-app.use(helmet());
+// app.use(helmet());
 app.use(compression());
 
 // Templating Engine Setup
