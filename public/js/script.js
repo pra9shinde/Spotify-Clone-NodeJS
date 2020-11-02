@@ -14,12 +14,16 @@ let loggedInUserName;
 
 let base_url;
 
+let openModalCount = 0;
+
 // class to handle audio API of browser
 class Audio {
     constructor() {
         this.currentlyPlaying; //current playing song
         this.audio = document.createElement("audio"); //create a html audio element
 
+        this.audio.autoplay = true;
+        this.audio.muted = true;
         // Update Song Duration in UI, Event fires when audio is ready to play
         this.audio.addEventListener("canplay", function () {
             // here 'this' refers to the event object of the audio
@@ -57,12 +61,38 @@ class Audio {
     }
 
     play() {
-        this.audio.play();
+        // this.audio.muted = true; // Need to do this because of brower policies.
+
+        this.audio.muted = false;
+        this.audio
+            .play()
+            .then((res) => {})
+            .catch((e) => {
+                pauseSong();
+                if (openModalCount <= 0) {
+                    openModal();
+                } else {
+                    playSong();
+                }
+            });
     }
 
     pause() {
+        this.audio.muted = false;
         this.audio.pause();
     }
+}
+
+function openModal() {
+    $("#allow-audio-modal").addClass("active");
+    $("#allow-audio-modal .modal").addClass("active");
+}
+
+function closeModal() {
+    $("#allow-audio-modal").removeClass("active");
+    $("#allow-audio-modal .modal").removeClass("active");
+    playSong();
+    openModalCount += 1;
 }
 
 //Events to hide options menu
@@ -119,6 +149,14 @@ function timeFromOffset(mouse, progressBar) {
         (mouse.offsetX / progressBar.getBoundingClientRect().width) * 100;
     let seconds = audioElement.audio.duration * (percentage / 100);
     audioElement.setTime(seconds);
+}
+
+function recoverOffsetValuesMobileTouch(e, element) {
+    var rect = element.getBoundingClientRect();
+    var bodyRect = document.body.getBoundingClientRect();
+    var x = e.targetTouches[0].pageX - rect.left;
+    var y = e.targetTouches[0].pageY - rect.top;
+    return [x, y];
 }
 
 //Update the progress bar as the music is playing
@@ -259,6 +297,20 @@ function shuffleArray(arr) {
     }
 }
 
+// Toggle Mobile Menu
+function toggleMenu() {
+    const navContainer = document.getElementById("navbarContainer");
+    const mobileToggle = document.getElementById("mobile-nav-toggle");
+
+    if (navContainer.className === "") {
+        navContainer.classList.add("active");
+        mobileToggle.style.display = "none";
+    } else {
+        navContainer.classList.remove("active");
+        mobileToggle.style.display = "block";
+    }
+}
+
 /**************** AJAX Calls ******************/
 // Play the song
 function playSong() {
@@ -274,6 +326,12 @@ function playSong() {
             },
             error: function (e) {
                 console.log(e);
+            },
+            beforeSend: function () {
+                $("#loader").fadeIn(500);
+            },
+            complete: function () {
+                $("#loader").fadeOut(500);
             },
         });
     }
@@ -319,9 +377,19 @@ function setTrack(trackId, newPlaylist, play) {
             if (play) {
                 playSong();
             }
+
+            // Avoid Autoplay
+            pauseSong();
+            audioElement.currentTime = 0;
         },
         error: function (e) {
             console.log(e.responseText);
+        },
+        beforeSend: function () {
+            $("#loader").fadeIn(500);
+        },
+        complete: function () {
+            $("#loader").fadeOut(500);
         },
     });
 }
@@ -343,6 +411,12 @@ function setArtist(id) {
         },
         error: function (e) {
             console.log(e.responseText);
+        },
+        beforeSend: function () {
+            $("#loader").fadeIn(500);
+        },
+        complete: function () {
+            $("#loader").fadeOut(500);
         },
     });
 }
@@ -391,6 +465,12 @@ function createPlaylist() {
             error: function (e) {
                 console.log(e.responseText);
             },
+            beforeSend: function () {
+                $("#loader").fadeIn(500);
+            },
+            complete: function () {
+                $("#loader").fadeOut(500);
+            },
         });
     }
 }
@@ -412,6 +492,12 @@ function deletePlaylist(id) {
             },
             error: function (e) {
                 console.log(e.responseText);
+            },
+            beforeSend: function () {
+                $("#loader").fadeIn(500);
+            },
+            complete: function () {
+                $("#loader").fadeOut(500);
             },
         });
     }
@@ -442,6 +528,12 @@ $(document).on("change", "select.playlist", function () {
         error: function (e) {
             console.log(e.responseText);
         },
+        beforeSend: function () {
+            $("#loader").fadeIn(500);
+        },
+        complete: function () {
+            $("#loader").fadeOut(500);
+        },
     });
 });
 
@@ -466,6 +558,12 @@ function removeFromPlaylist(button, playlistId) {
         },
         error: function (e) {
             console.log(e.responseText);
+        },
+        beforeSend: function () {
+            $("#loader").fadeIn(500);
+        },
+        complete: function () {
+            $("#loader").fadeOut(500);
         },
     });
 }
@@ -495,6 +593,12 @@ function updateUserEmail(username) {
             },
             error: function (e) {
                 console.log(e.responseText);
+            },
+            beforeSend: function () {
+                $("#loader").fadeIn(500);
+            },
+            complete: function () {
+                $("#loader").fadeOut(500);
             },
         });
     } else {
@@ -535,6 +639,12 @@ function updateUserPassword(username) {
             error: function (e) {
                 console.log(e.responseText);
             },
+            beforeSend: function () {
+                $("#loader").fadeIn(500);
+            },
+            complete: function () {
+                $("#loader").fadeOut(500);
+            },
         });
     } else {
         alert("Something Went Wrong");
@@ -562,6 +672,12 @@ function logout(username) {
             error: function (e) {
                 console.log(e.responseText);
             },
+            beforeSend: function () {
+                $("#loader").fadeIn(500);
+            },
+            complete: function () {
+                $("#loader").fadeOut(500);
+            },
         });
     }
 }
@@ -582,6 +698,12 @@ $(document).ready(function () {
         },
         error: function (e) {
             console.log(e.responseText);
+        },
+        beforeSend: function () {
+            $("#loader").fadeIn(500);
+        },
+        complete: function () {
+            $("#loader").fadeOut(500);
         },
     });
 
@@ -608,6 +730,20 @@ $(document).ready(function () {
         timeFromOffset(e, progressBarEl);
     });
 
+    // Progressbar Mobile
+    progressBarEl.addEventListener("touchstart", function (e) {
+        // Set Time of the song depending on the position of the click
+        const offsets = recoverOffsetValuesMobileTouch(e, progressBarEl);
+        let percentage =
+            (offsets[0] / progressBarEl.getBoundingClientRect().width) * 100;
+        let seconds = audioElement.audio.duration * (percentage / 100);
+        audioElement.setTime(seconds);
+    });
+
+    progressBarEl.addEventListener("touchend", function (e) {
+        mouseDown = true;
+    });
+
     // Change Volume Bar events
     const volumeBarEl = document.querySelector(".volumeBar .progressBar");
     volumeBarEl.addEventListener("mousedown", function () {
@@ -629,6 +765,20 @@ $(document).ready(function () {
         }
     });
 
+    // VolumeBar Mobile
+    volumeBarEl.addEventListener("touchstart", function (e) {
+        // Set Time of the song depending on the posotion of the click
+        const offsets = recoverOffsetValuesMobileTouch(e, volumeBarEl);
+        const percent = offsets[0] / this.getBoundingClientRect().width;
+        if (percent >= 0 && percent <= 1) {
+            audioElement.audio.volume = percent;
+        }
+    });
+
+    volumeBarEl.addEventListener("touchend", function (e) {
+        mouseDown = true;
+    });
+
     //close the event when user mouseup anywhere in the document
     document.addEventListener("mouseup", function () {
         mouseDown = false;
@@ -637,3 +787,7 @@ $(document).ready(function () {
     /*------------- Event Listeners --------------*/
 });
 /**************** AJAX Calls ******************/
+
+$(window).on("load", function () {
+    $("#loader").fadeOut(500);
+});

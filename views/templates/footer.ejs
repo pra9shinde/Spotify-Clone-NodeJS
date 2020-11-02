@@ -25,32 +25,38 @@
                     </span>
                 </div>
             </div>
+
         </div>
 
         <div id="nowPlayingCenter">
             <div class="content playerControls">
                 <div class="btns">
-                    <button class="control-btn shuffle" title="Shuffle Songs" onclick="setShuffle()">
+                    <button class="control-btn shuffle" title="Shuffle Songs" onclick="setShuffle()"
+                        ontouchstart="setShuffle()">
                         <img src="/images/icons/shuffle.png" alt="Shuffle Songs">
                     </button>
 
-                    <button class="control-btn previous" title="Previous Song" onclick="prevSong()">
+                    <button class="control-btn previous" title="Previous Song" onclick="prevSong()"
+                        ontouchstart="prevSong()">
                         <img src="/images/icons/previous.png" alt="Previous Song">
                     </button>
 
                     <button class="control-btn play" title="Play Song">
-                        <img src="/images/icons/play.png" alt="Play Song" onclick="playSong()">
+                        <img src="/images/icons/play.png" alt="Play Song" onclick="playSong()"
+                            ontouchstart="playSong()">
                     </button>
 
-                    <button class="control-btn pause" title="Pause Song" style="display: none;" onclick="pauseSong()">
+                    <button class="control-btn pause" title="Pause Song" style="display: none;" onclick="pauseSong()"
+                        ontouchstart="pauseSong()">
                         <img src="/images/icons/pause.png" alt="Pause Song">
                     </button>
 
-                    <button class="control-btn next" title="Next Song" onclick="nextSong()">
+                    <button class="control-btn next" title="Next Song" onclick="nextSong()" ontouchstart="nextSong()">
                         <img src="/images/icons/next.png" alt="Next Song">
                     </button>
 
-                    <button class="control-btn repeat" title="Repeat Song" onclick="setRepeat()">
+                    <button class="control-btn repeat" title="Repeat Song" onclick="setRepeat()"
+                        ontouchstart="setRepeat()">
                         <img src="/images/icons/repeat.png" alt="Repeat Song">
                     </button>
                 </div>
@@ -71,7 +77,7 @@
 
         <div id="nowPlayingRight">
             <div class="volumeBar">
-                <button class="control-btn volume" title="Volume button" onclick="setMute()">
+                <button class="control-btn volume" title="Volume button" onclick="setMute()" ontouchstart="setMute()">
                     <img src="/images/icons/volume.png" alt="Volume">
                 </button>
 
@@ -86,6 +92,25 @@
 </div>
 
 </div>
+
+<div class="modal-overlay" id="allow-audio-modal">
+    <div class="modal">
+        <div class="modal-container">
+            <div class="modal-content">
+                <h3>Our app needs audio permission from your browser,</h3>
+                <br>
+                <h3>Please press ALLOW to continue</h3>
+                <button class="button green" onclick="closeModal()">ALLOW</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loader-overlay" id="loader">
+    <div class="loader">Loading...</div>
+</div>
+
+
 </body>
 
 </html>

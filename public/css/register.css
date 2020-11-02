@@ -148,6 +148,20 @@ body {
     margin: 15px 0;
 }
 
+.register-logo {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    background-color: #181818;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2ebd59;
+}
+
+.register-logo img {
+    max-width: 250px;
+    width: 100%;
+}
+
 @media only screen and (max-width: 940px) {
     #loginText {
         padding: 0px 20px;
@@ -185,5 +199,11 @@ body {
 
     #loginText {
         padding: 0 50px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .register-logo img {
+        max-width: 150px;
     }
 }
