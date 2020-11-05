@@ -6,13 +6,13 @@
 
 body {
     color: #fff;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     background-color: #181818;
     font-size: 14px;
     min-width: 720px;
 }
 
-[role="link"] {
+[role='link'] {
     cursor: pointer;
 }
 
@@ -104,17 +104,33 @@ body {
     height: 4px;
     width: 100%;
     border-radius: 2px;
+    position: relative;
 }
 
 .progress {
-    background-color: #a0a0a0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fffcfc;
     height: 4px;
     width: 0;
     border-radius: 2px;
+    z-index: 10;
 }
 
 .playbackBar .progressBar {
     margin-top: 3px;
+}
+
+.progressBar .buffered {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #a0a0a0;
+    height: 4px;
+    width: 0;
+    border-radius: 2px;
+    z-index: 5;
 }
 
 #nowPlayingLeft .albumArtWork {
@@ -283,7 +299,7 @@ body {
 }
 
 .img-container::after {
-    content: "";
+    content: '';
     background-color: #fff;
     border-radius: 50%;
     position: absolute;
@@ -440,19 +456,19 @@ body {
     font-weight: 300px;
 }
 
-.searchContainer input[type="text"] {
+.searchContainer input[type='text'] {
     width: 100%;
     background-color: transparent;
     border: 0;
     color: #fff;
     font-weight: 700;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     font-size: 62px;
     letter-spacing: 2px;
     padding: 10px 0;
 }
 
-.searchContainer input[type="text"]:focus {
+.searchContainer input[type='text']:focus {
     outline: 0;
 }
 
@@ -569,8 +585,8 @@ body {
     text-align: center;
 }
 
-.userDetails .container input[type="text"],
-.userDetails .container input[type="password"] {
+.userDetails .container input[type='text'],
+.userDetails .container input[type='password'] {
     display: block;
     margin: 16px auto;
 }
@@ -748,7 +764,7 @@ body {
 .loader:after {
     position: absolute;
     top: 0;
-    content: "";
+    content: '';
 }
 .loader:before {
     left: -1.5em;
