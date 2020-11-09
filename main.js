@@ -31,27 +31,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join('public'))); //grant html resource files permission to load
 app.use(session({ secret: 'We1c0me@123', resave: false, saveUninitialized: false }));
 
-//Error 500 page
-app.get('/', (req, res, next) => {
-    res.end('Testing');
-});
+try {
+    app.use(userRoutes);
 
-/*
-app.use(userRoutes);
+    // Index Page
+    app.get('/', userController.getIndex);
 
-// Index Page
-app.get('/', userController.getIndex);
+    //Error 500 page
+    app.get('/500', (req, res, next) => {
+        res.status(500).render('500', { title: 'ExpressMusicX | 500 Error Page' });
+    });
 
-//Error 500 page
-app.get('/500', (req, res, next) => {
-    res.status(500).render('500', { title: 'ExpressMusicX | 500 Error Page' });
-});
+    // 404
+    app.use((req, res, next) => {
+        res.render('404', { title: 'ExpressMusicX | 404 Page not found' });
+    });
+} catch (e) {
+    console.log('Routing Error');
+}
 
-// 404
-app.use((req, res, next) => {
-    res.render('404', { title: 'ExpressMusicX | 404 Page not found' });
-});
-*/
 const server = http.createServer(app);
 
 //Start Server only after connecting to DB
