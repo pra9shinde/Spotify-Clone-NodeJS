@@ -34,8 +34,10 @@ app.use(session({ secret: 'We1c0me@123', resave: false, saveUninitialized: false
 // app.use(userRoutes);
 
 // Index Page
+// app.get('/', userController.getIndex);
 app.get('/', (req, res, next) => {
-    res.status(500).render('500', { title: 'ExpressMusicX | 500 Error Page' });
+    console.log('first in');
+    res.send('Hello World!!!!');
 });
 
 /*
