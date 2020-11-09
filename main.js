@@ -55,5 +55,5 @@ db.getConnection()
         server.listen(process.env.PORT || 3000);
     })
     .catch((e) => {
-        res.status(500).render('500', { title: 'ExpressMusicX | 500 Error Page' });
+        console.log('DB Connection Error');
     });
