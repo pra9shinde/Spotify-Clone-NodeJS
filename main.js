@@ -6,9 +6,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('cookie-session');
-
-//
-// const helmet = require("helmet"); //Adds Secure Response Headers to Each Request
 const compression = require('compression'); //Compress data and sends to response automatically
 
 const db = require('./util/database');
@@ -16,8 +13,8 @@ const db = require('./util/database');
 const userController = require('./controllers/user');
 
 const app = express();
+const router = express.Router();
 
-// app.use(helmet());
 // app.use(compression());
 
 // Templating Engine Setup
@@ -35,7 +32,7 @@ const app = express();
 
 // Index Page
 // app.get('/', userController.getIndex);
-app.get('/', (req, res, next) => {
+router.get('/', (req, res, next) => {
     console.log('first in');
     res.send('Hello World!!!!');
 });
