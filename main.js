@@ -1,21 +1,22 @@
 // process.env.BASE_URL = "http://localhost:3000";
 
 const http = require('http');
-const path = require('path');
+// const path = require('path');
 
 const express = require('express');
-const bodyParser = require('body-parser');
-const session = require('cookie-session');
-const compression = require('compression'); //Compress data and sends to response automatically
+// const bodyParser = require('body-parser');
+// const session = require('cookie-session');
+// const compression = require('compression'); //Compress data and sends to response automatically
 
-const db = require('./util/database');
+// const db = require('./util/database');
 // Controllers
-const userController = require('./controllers/user');
+// const userController = require('./controllers/user');
 
 const app = express();
 
 app.get('/', (req, res, next) => {
-    res.status(500).render('500', { title: 'ExpressMusicX | 500 Error Page' });
+    res.send('<h1>Working</h12>');
+    // res.status(500).render('500', { title: 'ExpressMusicX | 500 Error Page' });
 });
 
 // app.use(compression());
@@ -47,6 +48,7 @@ app.get('/', (req, res, next) => {
 // });
 
 const server = http.createServer(app);
+server.listen(process.env.PORT || 3000);
 
 //Start Server only after connecting to DB
 // db.getConnection()
