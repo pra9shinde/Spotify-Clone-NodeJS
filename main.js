@@ -27,9 +27,9 @@ app.set('views', 'views');
 // Routers
 const userRoutes = require('./routes/user');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join('public'))); //grant html resource files permission to load
-app.use(session({ secret: 'We1c0me@123', resave: false, saveUninitialized: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(express.static(path.join('public'))); //grant html resource files permission to load
+// app.use(session({ secret: 'We1c0me@123', resave: false, saveUninitialized: false }));
 
 // app.use(userRoutes);
 
