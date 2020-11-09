@@ -1,27 +1,28 @@
 //Load Models
-const Account = require("../models/Account");
-const Songs = require("../models/Songs");
-const Artist = require("../models/Artist");
-const User = require("../models/User");
+const Account = require('../models/Account');
+const Songs = require('../models/Songs');
+const Artist = require('../models/Artist');
+const User = require('../models/User');
 
-const { json } = require("body-parser");
+const { json } = require('body-parser');
 
 const data = {
-    userName: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    password2: "",
+    userName: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    password2: '',
 };
 
 // Load index page view
 exports.getIndex = (req, res, next) => {
+    console.log('getIndex in');
     if (!req.session.loggedinUser) {
-        return res.render("register", {
-            title: "ExpressMusicX - Register",
+        return res.render('register', {
+            title: 'ExpressMusicX - Register',
             formData: data,
-            loginUsername: "",
+            loginUsername: '',
             baseURL: process.env.BASE_URL,
         });
     }
@@ -30,8 +31,8 @@ exports.getIndex = (req, res, next) => {
     Songs.fetchAllAlbums()
         .then((result) => {
             result = Object.values(JSON.parse(JSON.stringify(result[0])));
-            res.render("index", {
-                title: "ExpressMusicX",
+            res.render('index', {
+                title: 'ExpressMusicX',
                 albums: result,
                 loggedInUser: req.session.loggedinUserFullName,
                 isAjaxRequest: req.xhr,
@@ -39,31 +40,31 @@ exports.getIndex = (req, res, next) => {
             });
         })
         .catch((e) => {
-            res.redirect("/500");
+            res.redirect('/500');
         });
 };
 
 // Register page view
 exports.getRegister = (req, res, next) => {
     try {
-        res.render("register", {
-            title: "ExpressMusicX - Register",
+        res.render('register', {
+            title: 'ExpressMusicX - Register',
             formData: data,
-            loginUsername: "",
+            loginUsername: '',
             baseURL: process.env.BASE_URL,
         });
     } catch (e) {
-        res.redirect("/500");
+        res.redirect('/500');
     }
 };
 
 // Single Album Details Page
 exports.getAlbum = (req, res, next) => {
     if (!req.session.loggedinUser) {
-        return res.render("register", {
-            title: "ExpressMusicX - Register",
+        return res.render('register', {
+            title: 'ExpressMusicX - Register',
             formData: data,
-            loginUsername: "",
+            loginUsername: '',
             baseURL: process.env.BASE_URL,
         });
     }
@@ -81,11 +82,11 @@ exports.getAlbum = (req, res, next) => {
             })
             .then((result) => {
                 if (!result) {
-                    res.redirect("/");
+                    res.redirect('/');
                 } else {
                     // console.log(result.albumDet);
-                    res.render("album", {
-                        title: "ExpressMusicX - Album Details",
+                    res.render('album', {
+                        title: 'ExpressMusicX - Album Details',
                         data: result,
                         loggedInUser: req.session.loggedinUserFullName,
                         isAjaxRequest: req.xhr,
@@ -95,20 +96,20 @@ exports.getAlbum = (req, res, next) => {
                 }
             })
             .catch((e) => {
-                res.redirect("/500");
+                res.redirect('/500');
             });
     } else {
-        res.redirect("/");
+        res.redirect('/');
     }
 };
 
 // Artist view
 exports.getArtist = (req, res, next) => {
     if (!req.session.loggedinUser) {
-        return res.render("register", {
-            title: "ExpressMusicX - Register",
+        return res.render('register', {
+            title: 'ExpressMusicX - Register',
             formData: data,
-            loginUsername: "",
+            loginUsername: '',
             baseURL: process.env.BASE_URL,
         });
     }
@@ -125,8 +126,8 @@ exports.getArtist = (req, res, next) => {
                 return artist.getArtistPageDetails();
             })
             .then((result) => {
-                res.render("artist", {
-                    title: "ExpressMusicX - Artist Details",
+                res.render('artist', {
+                    title: 'ExpressMusicX - Artist Details',
                     loggedInUser: req.session.loggedinUserFullName,
                     isAjaxRequest: req.xhr,
                     data: result,
@@ -135,30 +136,30 @@ exports.getArtist = (req, res, next) => {
                 });
             })
             .catch((e) => {
-                res.redirect("/500");
+                res.redirect('/500');
             });
     } else {
-        res.redirect("/");
+        res.redirect('/');
     }
 };
 
 //Search View
 exports.getSearch = (req, res, next) => {
     if (!req.session.loggedinUser) {
-        return res.render("register", {
-            title: "ExpressMusicX - Register",
+        return res.render('register', {
+            title: 'ExpressMusicX - Register',
             formData: data,
-            loginUsername: "",
+            loginUsername: '',
             baseURL: process.env.BASE_URL,
         });
     }
 
     let term = decodeURIComponent(req.query.term); //decodeURI will remove encoded whitespaces from URL params
-    if (term === "undefined") {
-        term = "";
+    if (term === 'undefined') {
+        term = '';
     }
 
-    const userLoggedInIndex = term.indexOf("userLoggedIn"); //Remove extra params
+    const userLoggedInIndex = term.indexOf('userLoggedIn'); //Remove extra params
     if (userLoggedInIndex !== -1) {
         term = term.substr(0, userLoggedInIndex - 1);
     }
@@ -183,8 +184,8 @@ exports.getSearch = (req, res, next) => {
         })
         .then((albums) => {
             output.albumList = albums;
-            res.render("search", {
-                title: "ExpressMusicX | Search",
+            res.render('search', {
+                title: 'ExpressMusicX | Search',
                 data: output,
                 loggedInUser: req.session.loggedinUserFullName,
                 isAjaxRequest: req.xhr,
@@ -194,25 +195,25 @@ exports.getSearch = (req, res, next) => {
             });
         })
         .catch((e) => {
-            res.redirect("/500");
+            res.redirect('/500');
         });
 };
 
 //Your Music View
 exports.getYourMusic = (req, res, next) => {
     if (!req.session.loggedinUser) {
-        return res.render("register", {
-            title: "ExpressMusicX - Register",
+        return res.render('register', {
+            title: 'ExpressMusicX - Register',
             formData: data,
-            loginUsername: "",
+            loginUsername: '',
         });
     }
 
     const user = new User(req.session.loggedinUser);
     user.getUserPlaylist()
         .then((result) => {
-            res.render("yourMusic", {
-                title: "ExpressMusicX | Your Music",
+            res.render('yourMusic', {
+                title: 'ExpressMusicX | Your Music',
                 loggedInUser: req.session.loggedinUserFullName,
                 isAjaxRequest: req.xhr,
                 userPlaylists: result,
@@ -220,17 +221,17 @@ exports.getYourMusic = (req, res, next) => {
             });
         })
         .catch((e) => {
-            res.redirect("/500");
+            res.redirect('/500');
         });
 };
 
 //Get Single Playlist Details Page
 exports.getPlaylistView = (req, res, next) => {
     if (!req.session.loggedinUser) {
-        return res.render("register", {
-            title: "ExpressMusicX - Register",
+        return res.render('register', {
+            title: 'ExpressMusicX - Register',
             formData: data,
-            loginUsername: "",
+            loginUsername: '',
             baseURL: process.env.BASE_URL,
         });
     }
@@ -255,8 +256,8 @@ exports.getPlaylistView = (req, res, next) => {
         .then((playlistSongs) => {
             details.songsCount = playlistSongs.length;
             details.songsList = playlistSongs;
-            res.render("playlist", {
-                title: "ExpressMusicX | Playlist",
+            res.render('playlist', {
+                title: 'ExpressMusicX | Playlist',
                 loggedInUser: req.session.loggedinUserFullName,
                 isAjaxRequest: req.xhr,
                 data: details,
@@ -266,7 +267,7 @@ exports.getPlaylistView = (req, res, next) => {
             });
         })
         .catch((e) => {
-            res.redirect("/500");
+            res.redirect('/500');
         });
 };
 
@@ -274,32 +275,32 @@ exports.getPlaylistView = (req, res, next) => {
 exports.getProfile = (req, res, next) => {
     try {
         if (!req.session.loggedinUser) {
-            return res.render("register", {
-                title: "ExpressMusicX - Register",
+            return res.render('register', {
+                title: 'ExpressMusicX - Register',
                 formData: data,
-                loginUsername: "",
+                loginUsername: '',
             });
         }
 
-        res.render("userProfile", {
-            title: "ExpressMusicX | Profile",
+        res.render('userProfile', {
+            title: 'ExpressMusicX | Profile',
             loggedInUser: req.session.loggedinUserFullName,
             isAjaxRequest: req.xhr,
             username: req.session.loggedinUser,
             baseURL: process.env.BASE_URL,
         });
     } catch (e) {
-        res.redirect("/500");
+        res.redirect('/500');
     }
 };
 
 //Get Profile Edit Page
 exports.getupdateDetails = (req, res, next) => {
     if (!req.session.loggedinUser) {
-        return res.render("register", {
-            title: "ExpressMusicX - Register",
+        return res.render('register', {
+            title: 'ExpressMusicX - Register',
             formData: data,
-            loginUsername: "",
+            loginUsername: '',
             baseURL: process.env.BASE_URL,
         });
     }
@@ -307,8 +308,8 @@ exports.getupdateDetails = (req, res, next) => {
     const user = new User(req.session.loggedinUser);
     user.getUserDetails()
         .then((result) => {
-            res.render("updateDetails", {
-                title: "ExpressMusicX | Edit Profile",
+            res.render('updateDetails', {
+                title: 'ExpressMusicX | Edit Profile',
                 loggedInUser: req.session.loggedinUserFullName,
                 isAjaxRequest: req.xhr,
                 data: result,
@@ -316,7 +317,7 @@ exports.getupdateDetails = (req, res, next) => {
             });
         })
         .catch((e) => {
-            res.redirect("/500");
+            res.redirect('/500');
         });
 };
 
@@ -331,23 +332,23 @@ exports.login = (req, res, next) => {
     account
         .login(username, password)
         .then((result) => {
-            if (result.status === "failed") {
-                res.render("register", {
-                    title: "ExpressMusicX - Register",
+            if (result.status === 'failed') {
+                res.render('register', {
+                    title: 'ExpressMusicX - Register',
                     errorsObj: account,
                     formData: data,
                     loginUsername: username,
-                    src: "login",
+                    src: 'login',
                     baseURL: process.env.BASE_URL,
                 });
             } else {
                 req.session.loggedinUser = username;
                 req.session.loggedinUserFullName = result.userFullName;
-                res.redirect("/");
+                res.redirect('/');
             }
         })
         .catch((e) => {
-            res.redirect("/500");
+            res.redirect('/500');
         });
 };
 
@@ -368,20 +369,20 @@ exports.register = (req, res, next) => {
             if (result) {
                 req.session.loggedinUser = username;
                 req.session.loggedinUserFullName = `${firstname} ${lastname}`;
-                res.redirect("/");
+                res.redirect('/');
             } else {
-                res.render("register", {
-                    title: "ExpressMusicX - Register",
+                res.render('register', {
+                    title: 'ExpressMusicX - Register',
                     errorsObj: account,
                     formData: data,
                     loginUsername: username,
-                    src: "reg",
+                    src: 'reg',
                     baseURL: process.env.BASE_URL,
                 });
             }
         })
         .catch((e) => {
-            res.redirect("/500");
+            res.redirect('/500');
         });
 };
 
@@ -396,7 +397,7 @@ exports.getPlaylist = (req, res, next) => {
                 arr.push(data.id);
             });
 
-            res.json({ status: "Success", playlistArray: arr });
+            res.json({ status: 'Success', playlistArray: arr });
         })
         .catch((e) => console.log(e));
 };
@@ -407,7 +408,7 @@ exports.getSongByID = (req, res, next) => {
     Songs.getSongByID(songID)
         .then((result) => {
             let resultArr = JSON.parse(JSON.stringify(result[0]));
-            res.json({ status: "Success", songDetails: resultArr[0] });
+            res.json({ status: 'Success', songDetails: resultArr[0] });
         })
         .catch((e) => console.log(e));
 };
@@ -418,7 +419,7 @@ exports.getArtistByID = (req, res, next) => {
     Songs.getArtistByID(artistID)
         .then((result) => {
             let resultArr = JSON.parse(JSON.stringify(result[0]));
-            res.json({ status: "Success", artistDetails: resultArr[0] });
+            res.json({ status: 'Success', artistDetails: resultArr[0] });
         })
         .catch((e) => console.log(e));
 };
@@ -429,7 +430,7 @@ exports.getAlbumByID = (req, res, next) => {
     Songs.getAlbumByID(albumID)
         .then((result) => {
             let resultArr = JSON.parse(JSON.stringify(result[0]));
-            res.json({ status: "Success", albumDetails: resultArr[0] });
+            res.json({ status: 'Success', albumDetails: resultArr[0] });
         })
         .catch((e) => console.log(e));
 };
@@ -439,7 +440,7 @@ exports.updatePlays = (req, res, next) => {
     const songID = req.body.songid;
     Songs.updateSongPlays(songID)
         .then((result) => {
-            res.json({ status: "Success", res: result });
+            res.json({ status: 'Success', res: result });
         })
         .catch((e) => console.log(e));
 };
@@ -453,11 +454,11 @@ exports.createPlaylist = (req, res, next) => {
         const user = new User(username);
         user.createPlaylist(playlistName)
             .then((result) => {
-                res.json({ status: "Success", res: result });
+                res.json({ status: 'Success', res: result });
             })
             .catch((e) => console.log(e));
     } else {
-        res.json({ status: "Failure", res: "Session Expired" });
+        res.json({ status: 'Failure', res: 'Session Expired' });
     }
 };
 
@@ -470,11 +471,11 @@ exports.deletePlaylist = (req, res, next) => {
         const user = new User(username);
         user.deletePlaylist(playlistID)
             .then((result) => {
-                res.json({ status: "Success", res: result });
+                res.json({ status: 'Success', res: result });
             })
             .catch((e) => console.log(e));
     } else {
-        res.json({ status: "Failure", res: "Session Expired" });
+        res.json({ status: 'Failure', res: 'Session Expired' });
     }
 };
 
@@ -490,13 +491,13 @@ exports.addToPlaylist = (req, res, next) => {
         const user = new User(username);
         user.addtoPlaylist(playlistId, songId).then((result) => {
             if (result) {
-                res.json({ status: "Success", res: "Song added to playlist" });
+                res.json({ status: 'Success', res: 'Song added to playlist' });
             } else {
-                res.json({ status: "Failed", res: "Database Error Occurred" });
+                res.json({ status: 'Failed', res: 'Database Error Occurred' });
             }
         });
     } else {
-        res.json({ status: "Failed", res: "Required data not found" });
+        res.json({ status: 'Failed', res: 'Required data not found' });
     }
 };
 
@@ -512,18 +513,18 @@ exports.deleteFromPlaylist = (req, res, next) => {
             .then((result) => {
                 if (result === true) {
                     return res.json({
-                        status: "Success",
-                        res: "Song removed from playlist successfully",
+                        status: 'Success',
+                        res: 'Song removed from playlist successfully',
                     });
                 }
                 return res.json({
-                    status: "Failed",
-                    res: "Database Operation Failed",
+                    status: 'Failed',
+                    res: 'Database Operation Failed',
                 });
             })
             .catch((e) => console.log(e));
     } else {
-        res.json({ status: "Failed", res: "Required data not found" });
+        res.json({ status: 'Failed', res: 'Required data not found' });
     }
 };
 
@@ -531,12 +532,12 @@ exports.updateUserEmail = (req, res, next) => {
     const username = req.body.username;
     const email = req.body.email;
     if (!username === req.session.loggedinUser && !email) {
-        return res.json({ status: "Failed", res: "Required data not found" });
+        return res.json({ status: 'Failed', res: 'Required data not found' });
     }
 
     const pattern = /^[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)*@[a-z0-9]+(\-[a-z0-9]+)*(\.[a-z0-9]+(\-[a-z0-9]+)*)*\.[a-z]{2,4}$/;
     if (!pattern.test(email)) {
-        return res.json({ status: "Failed", res: "Enter Valid Email Address" });
+        return res.json({ status: 'Failed', res: 'Enter Valid Email Address' });
     }
 
     const user = new User(username);
@@ -544,17 +545,17 @@ exports.updateUserEmail = (req, res, next) => {
         .then((result) => {
             if (!result) {
                 return res.json({
-                    status: "Failed",
-                    res: "Database Operation Failed",
+                    status: 'Failed',
+                    res: 'Database Operation Failed',
                 });
             }
-            res.json({ status: "Success", res: "Email Updated Successfully" });
+            res.json({ status: 'Success', res: 'Email Updated Successfully' });
         })
         .catch((e) => {
             console.log(e);
             return res.json({
-                status: "Failed",
-                res: "Database Operation Failed",
+                status: 'Failed',
+                res: 'Database Operation Failed',
             });
         });
 };
@@ -565,37 +566,32 @@ exports.changeUserPassword = (req, res, next) => {
     const newPassword1 = req.body.newPassword1;
     const newPassword2 = req.body.newPassword2;
 
-    if (
-        !username === req.session.loggedinUser &&
-        !oldPassword &&
-        !newPassword1 &&
-        !newPassword2
-    ) {
-        return res.json({ status: "Failed", res: "Required data not found" });
+    if (!username === req.session.loggedinUser && !oldPassword && !newPassword1 && !newPassword2) {
+        return res.json({ status: 'Failed', res: 'Required data not found' });
     }
 
     if (oldPassword.length < 5 || oldPassword.length > 30) {
         return res.json({
-            status: "Failed",
-            res: "Old Password length should be between 5 to 30 characters",
+            status: 'Failed',
+            res: 'Old Password length should be between 5 to 30 characters',
         });
     }
     if (newPassword1.length < 5 || newPassword1.length > 30) {
         return res.json({
-            status: "Failed",
-            res: "New Password length should be between 5 to 30 characters",
+            status: 'Failed',
+            res: 'New Password length should be between 5 to 30 characters',
         });
     }
     if (newPassword1 !== newPassword2) {
         return res.json({
-            status: "Failed",
-            res: "New Password not matching with confirm password",
+            status: 'Failed',
+            res: 'New Password not matching with confirm password',
         });
     }
     if (oldPassword === newPassword1) {
         return res.json({
-            status: "Failed",
-            res: "New Password should not match old password",
+            status: 'Failed',
+            res: 'New Password should not match old password',
         });
     }
 
@@ -605,7 +601,7 @@ exports.changeUserPassword = (req, res, next) => {
             // console.log(result);
             if (result !== true) {
                 return res.json({
-                    status: "Failed",
+                    status: 'Failed',
                     res: result,
                 });
             }
@@ -615,28 +611,31 @@ exports.changeUserPassword = (req, res, next) => {
         .then((updateRes) => {
             if (updateRes === true) {
                 return res.json({
-                    status: "Success",
-                    res: "Password Updated Successfully",
+                    status: 'Success',
+                    res: 'Password Updated Successfully',
                 });
             }
             return res.json({
-                status: "Failed",
-                res: "Database Operation Failed",
+                status: 'Failed',
+                res: 'Database Operation Failed',
             });
         })
         .catch((e) => {
             return res.json({
-                status: "Failed",
-                res: "Database Operation Failed",
+                status: 'Failed',
+                res: 'Database Operation Failed',
             });
         });
 };
 
 //Logout User
 exports.logout = (req, res, next) => {
-    req.session.destroy(function (err) {
-        return res.json({ status: "Success", res: "Loggedout Successfully" });
-    });
+    req.session = null;
+    return res.json({ status: 'Success', res: 'Loggedout Successfully' });
+
+    // req.session.destroy(function (err) {
+    //     return res.json({ status: "Success", res: "Loggedout Successfully" });
+    // });
 };
 
 /**************/
@@ -653,4 +652,4 @@ function getUserPlaylists(username) {
 }
 
 // remove all html tags if user inserts into text input
-const stripTags = (text) => text.replace(/(<([^>]+)>)/gi, "").trim();
+const stripTags = (text) => text.replace(/(<([^>]+)>)/gi, '').trim();

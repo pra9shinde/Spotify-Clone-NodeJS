@@ -5,7 +5,7 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const session = require('express-session');
+const session = require('cookie-session');
 
 //
 // const helmet = require("helmet"); //Adds Secure Response Headers to Each Request
@@ -47,12 +47,12 @@ app.use((req, res, next) => {
 });
 
 const server = http.createServer(app);
-server.listen(process.env.PORT || 3000);
 
 //Start Server only after connecting to DB
 db.getConnection()
     .then((conn) => {
         console.log('DB Connection Successfull');
+        server.listen(process.env.PORT || 3000);
     })
     .catch((e) => {
         console.log('DB Connection Error');
