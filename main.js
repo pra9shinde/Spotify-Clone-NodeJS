@@ -21,7 +21,7 @@ const app = express();
 // app.use(compression());
 
 // Templating Engine Setup
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 // app.set('views', 'views');
 
 // Routers
