@@ -17,7 +17,6 @@ const data = {
 
 // Load index page view
 exports.getIndex = (req, res, next) => {
-    console.log('getIndex in');
     if (!req.session.loggedinUser) {
         return res.render('register', {
             title: 'ExpressMusicX - Register',
