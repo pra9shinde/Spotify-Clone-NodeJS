@@ -47,12 +47,12 @@ app.use((req, res, next) => {
 });
 
 const server = http.createServer(app);
+server.listen(process.env.PORT || 3000);
 
 //Start Server only after connecting to DB
 db.getConnection()
     .then((conn) => {
         console.log('DB Connection Successfull');
-        server.listen(process.env.PORT || 3000);
     })
     .catch((e) => {
         console.log('DB Connection Error');
