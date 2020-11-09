@@ -18,14 +18,14 @@ const userController = require('./controllers/user');
 const app = express();
 
 // app.use(helmet());
-app.use(compression());
+// app.use(compression());
 
 // Templating Engine Setup
-app.set('view engine', 'ejs');
-app.set('views', 'views');
+// app.set('view engine', 'ejs');
+// app.set('views', 'views');
 
 // Routers
-const userRoutes = require('./routes/user');
+// const userRoutes = require('./routes/user');
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(express.static(path.join('public'))); //grant html resource files permission to load
