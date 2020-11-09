@@ -18,11 +18,11 @@ const userController = require('./controllers/user');
 const app = express();
 
 // app.use(helmet());
-app.use(compression());
+// app.use(compression());
 
 // Templating Engine Setup
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+// app.set('views', 'views');
 
 // Routers
 // const userRoutes = require('./routes/user');
