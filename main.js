@@ -31,6 +31,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join('public'))); //grant html resource files permission to load
 app.use(session({ secret: 'We1c0me@123', resave: false, saveUninitialized: false }));
 
+//Error 500 page
+app.get('/', (req, res, next) => {
+    res.end('Testing');
+});
+
+/*
 app.use(userRoutes);
 
 // Index Page
@@ -45,7 +51,7 @@ app.get('/500', (req, res, next) => {
 app.use((req, res, next) => {
     res.render('404', { title: 'ExpressMusicX | 404 Page not found' });
 });
-
+*/
 const server = http.createServer(app);
 
 //Start Server only after connecting to DB
