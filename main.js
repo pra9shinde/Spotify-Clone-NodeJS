@@ -1,4 +1,8 @@
 // process.env.BASE_URL = "http://localhost:3000";
+process.env.DB_HOST = 'us-cdbr-east-02.cleardb.com';
+process.env.DB_NAME = 'heroku_61db2046f0f253e';
+process.env.DB_PASSWORD = '3193b94c';
+process.env.DB_USER = 'b295b9364e9c81';
 
 const http = require('http');
 const path = require('path');

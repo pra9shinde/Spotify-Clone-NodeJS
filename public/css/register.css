@@ -207,3 +207,8 @@ body {
         max-width: 150px;
     }
 }
+
+span.dummy{
+    font-size: 11px;
+    color:#2ebd59 !important;
+}
