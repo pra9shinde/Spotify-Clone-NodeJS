@@ -1,4 +1,4 @@
-// process.env.BASE_URL = "http://localhost:3000";
+// process.env.BASE_URL = 'http://localhost:3000/';
 process.env.DB_HOST = 'us-cdbr-east-02.cleardb.com';
 process.env.DB_NAME = 'heroku_61db2046f0f253e';
 process.env.DB_PASSWORD = '3193b94c';
@@ -38,22 +38,22 @@ app.get('/', userController.getIndex);
 
 //Error 500 page
 app.get('/500', (req, res, next) => {
-    res.status(500).render('500', { title: 'ExpressMusicX | 500 Error Page' });
+  res.status(500).render('500', { title: 'ExpressMusicX | 500 Error Page' });
 });
 
 // 404
 app.use((req, res, next) => {
-    res.render('404', { title: 'ExpressMusicX | 404 Page not found' });
+  res.render('404', { title: 'ExpressMusicX | 404 Page not found' });
 });
 
 const server = http.createServer(app);
 
 //Start Server only after connecting to DB
 db.getConnection()
-    .then((conn) => {
-        console.log('DB Connection Successfull');
-        server.listen(process.env.PORT || 3000);
-    })
-    .catch((e) => {
-        console.log('DB Connection Error');
-    });
+  .then((conn) => {
+    console.log(`DB Connection Successfull, Server Running on port ${process.env.PORT || 3000}`);
+    server.listen(process.env.PORT || 3000);
+  })
+  .catch((e) => {
+    console.log('DB Connection Error');
+  });
