@@ -19,12 +19,12 @@
 	<meta name="description"
 		content="ExpressMusicX - Simple Spotify Clone Built Using NodeJS, Express, MySQL, Javascript" />
 
-	<meta property="og:image" content="https://express-music-x.herokuapp.com/images/ExpressMusicX-Pranav-Shinde.png">
+	<meta property="og:image" content="https://expressmusicx.cyclic.app/images/ExpressMusicX-Pranav-Shinde.png">
 	<meta property="og:image:type" content="image/png">
 	<meta property="og:image:width" content="500">
 	<meta property="og:image:height" content="500">
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://express-music-x.herokuapp.com/" />
+	<meta property="og:url" content="https://expressmusicx.cyclic.app/" />
 	<meta property="og:title" content="ExpressMusicX" />
 	<meta property="og:description"
 		content="ExpressMusicX - Simple Spotify Clone Built Using NodeJS, Express, MySQL, Javascript" />
@@ -74,14 +74,13 @@
 													<%- errorsObj.getError('loginIssue') %>
 														<% } %>
 															<label for="loginUsername">Username* </label>
-															<input type="text" id="loginUsername" name="loginUsername"
-																placeholder="eg. pranav" value="pranav"
-																required />
+															<input type="text" id="loginUsername" name="loginUsername" placeholder="eg. pranav"
+																value="pranav" required />
 											</p>
 											<p>
 												<label for="loginPassword">Password* </label>
-												<input type="password" id="loginPassword" name="loginPassword"
-													placeholder="Your password*" required value="12345678" />
+												<input type="password" id="loginPassword" name="loginPassword" placeholder="Your password*"
+													required value="12345678" />
 											</p>
 
 											<button type="submit" name="loginButton">Login</button>
@@ -100,8 +99,7 @@
 														<%- errorsObj.getError('userNameExists') %>
 															<% } %>
 																<label for="username">Username* </label>
-																<input type="text" id="username" name="username"
-																	placeholder="eg. pranav"
+																<input type="text" id="username" name="username" placeholder="eg. pranav"
 																	value="<%=formData.userName%>" required />
 											</p>
 
@@ -110,9 +108,8 @@
 													<%- errorsObj.getError('firstName') %>
 														<% } %>
 															<label for="firstName">First name* </label>
-															<input type="text" id="firstName" name="firstName"
-																placeholder="eg. Pranav" value="<%=formData.firstName%>"
-																required />
+															<input type="text" id="firstName" name="firstName" placeholder="eg. Pranav"
+																value="<%=formData.firstName%>" required />
 											</p>
 
 											<p>
@@ -120,9 +117,8 @@
 													<%- errorsObj.getError('lastName') %>
 														<% } %>
 															<label for="lastName">Last name* </label>
-															<input type="text" id="lastName" name="lastName"
-																placeholder="eg. Shinde" value="<%=formData.lastName%>"
-																required />
+															<input type="text" id="lastName" name="lastName" placeholder="eg. Shinde"
+																value="<%=formData.lastName%>" required />
 											</p>
 
 											<p>
@@ -130,9 +126,8 @@
 													<%- errorsObj.getError('email') %>
 														<% } %>
 															<label for="email">Email* </label>
-															<input type="email" id="email" name="email"
-																placeholder="pranav@g.com" value="<%=formData.email%>"
-																required />
+															<input type="email" id="email" name="email" placeholder="pranav@g.com"
+																value="<%=formData.email%>" required />
 											</p>
 
 											<p>
@@ -143,8 +138,7 @@
 																<%- errorsObj.getError('passLength') %>
 																	<% } %>
 																		<label for="password">Password* </label>
-																		<input type="password" id="password"
-																			name="password" placeholder="Your password*"
+																		<input type="password" id="password" name="password" placeholder="Your password*"
 																			value="<%=formData.password%>" required />
 											</p>
 											<p>
@@ -152,8 +146,7 @@
 													<%- errorsObj.getError('passPattern') %>
 														<% } %>
 															<label for="password2">Confirm Password* </label>
-															<input type="password" id="password2" name="password2"
-																placeholder="Re-enter password*"
+															<input type="password" id="password2" name="password2" placeholder="Re-enter password*"
 																value="<%=formData.password2%>" required />
 											</p>
 

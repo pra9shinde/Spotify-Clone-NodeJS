@@ -1,6 +1,6 @@
 <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="ExpressMusicX__A_Spotify_Clone_0"></a>ExpressMusicX - A Spotify Clone</h1>
 
-<p class="has-line-data" data-line-start="19" data-line-end="20">Live demo hosted on Heroku. [<a href="https://express-music-x.herokuapp.com/">https://express-music-x.herokuapp.com/</a>]</p>
+<p class="has-line-data" data-line-start="19" data-line-end="20">Live demo hosted on Cyclic. [<a href="https://expressmusicx.cyclic.app/">https://expressmusicx.cyclic.app/</a>]</p>
 
 <p class="has-line-data" data-line-start="4" data-line-end="5"><a href="#"><img src="https://travis-ci.org/joemccann/dillinger.svg?branch=master" alt="Build Status"></a></p>
 <p class="has-line-data" data-line-start="6" data-line-end="7">ExpressMusic X is a Spotify clone web application. Following are the technologies used</p>
@@ -17,7 +17,7 @@
 </ul>
 
 <ul>
-<li class="has-line-data" data-line-start="20" data-line-end="21">App is hosted on free hosting plan by Heroku. App will be slower because free plan has minimum hardware config.</li>
+<li class="has-line-data" data-line-start="20" data-line-end="21">App is hosted on free hosting plan by Cyclic. App will be slower because free plan has minimum hardware config.</li>
 <li class="has-line-data" data-line-start="21" data-line-end="22">You can register on ExpressMusicX as a new user.</li>
 <li class="has-line-data" data-line-start="22" data-line-end="24">or you can signin as guest user. Following are login credentials.</li>
 </ul>
